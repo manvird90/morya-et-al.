@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EMR</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Login Page Strings -->
+    <string name="txtWelcomeMessage">Welcome to The World of Ez-Health</string>
+    <string name="txtTagLine">Patient Monitoring and Caring Easier Now</string>
+    <string name="lblUser">User</string>
+    <string name="lblUserName">User Name</string>
+    <string name="lblPassword">Password</string>
+    <string name="btnLogin">Login</string>
+
+    <string-array name="spinnerUserArray">
+        <item>Patient</item>
+        <item>Doctor</item>
+        <item>Receptionist</item>
+        <item>HospitalAdmin</item>
+        <item>Lab Staff</item>
+        <item>Pharmacist</item>
+        <item>Nurse</item>
+    </string-array>
+
+    <!-- Hospital Admin page Registration -->
+    <string name="adminPageTitle">Register a New Staff Member</string>
+
+    <!--  -->
+    <string name="title_activity_hospital_admin">HospitalAdmin</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_patient_registration">PatientRegistration</string>
+    <string name="title_activity_doctor_registration">DoctorRegistration</string>
+    <string name="title_activity_google_map_services">GoogleMapServices</string>
+    <string name="title_activity_patient_account">PatientAccount</string>
+    <string name="title_activity_receptionist">Receptionist</string>
+
+</resources>
