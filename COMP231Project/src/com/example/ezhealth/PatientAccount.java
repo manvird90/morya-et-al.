@@ -29,7 +29,7 @@ public class PatientAccount extends Activity {
 		etUserName = (EditText) findViewById(R.id.etUserName);
 		etPassword = (EditText) findViewById(R.id.etPassword);
 		etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
-		btnCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
+		
 		
 		btnCreateAccount.setOnClickListener(new View.OnClickListener() {
 			

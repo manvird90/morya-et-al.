@@ -220,4 +220,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.insert(TABLE_VITALINFO, null, values);
         db.close(); // Closing database connection
     }
+    
+    public Cursor getPatientInformation(int patientId, String firstName, String lastName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENTREG+" where "+COL_PATIENTID+" = "+
+				patientId+" and "+COL_FIRSTNAME+" = \""+
+				firstName+"\" and "+COL_LASTNAME+" = \""+
+				lastName+"\"", null);
+        cursor.moveToFirst();
+        
+        return cursor;
+       
+    }
 }

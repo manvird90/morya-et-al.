@@ -33,5 +33,9 @@
     <string name="title_activity_google_map_services">GoogleMapServices</string>
     <string name="title_activity_patient_account">PatientAccount</string>
     <string name="title_activity_receptionist">Receptionist</string>
+    <string name="title_activity_receptionist_patient_search">ReceptionistPatientSearch</string>
+    <string name="title_activity_receptionist_doctor_search">ReceptionistDoctorSearch</string>
+    <string name="title_activity_receptionist_patient_profile_view">ReceptionistPatientProfileView</string>
+    <string name="title_activity_receptionist_doctor_profile_view">ReceptionistDoctorProfileView</string>
 
 </resources>

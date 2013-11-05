@@ -1,21 +1,56 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Receptionist" >
+    
+    <TableRow
+            android:id="@+id/trPatientSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:paddingLeft="30sp">
 
     <Button
         android:id="@+id/btnRegisterPatient"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="70dp"
-        android:text="Register Patient" />
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/btn_receptionist_patient_registration"
+        android:textColor="#FFFFFF"
+        android:paddingTop="25sp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
+        android:drawablePadding="-15sp"/>
+    
+        <Button
+        android:id="@+id/btnSearchDoctorInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/btn_receptionist_search_doctor_information"
+        android:textColor="#FFFFFF"
+        android:paddingTop="25sp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
+        android:drawablePadding="-15sp"/>
+        </TableRow>
+        
+    <TableRow
+        android:id="@+id/trDocSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30sp" >
+        <Button
+        android:id="@+id/btnSearchPatientInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/btn_receptionist_search_patient_information"
+        android:textColor="#FFFFFF"
+        android:paddingTop="25sp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
+        android:drawablePadding="-15sp"/>
+     </TableRow>
 
-</RelativeLayout>
+</TableLayout>
