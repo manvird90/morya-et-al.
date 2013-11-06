@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PatientAccount" >
+    tools:context=".DoctorAccount" >
 
     <TextView
         android:id="@+id/txtWelcomeMessage"
@@ -16,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         style="@style/WelcomeLineOnEachPage"
-        android:text="Enter the following information to create an account for patient" />
+        android:text="Enter the following information to create an account for doctor" />
 
 
    

@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class PatientAccount extends Activity {
+public class DoctorAccount extends Activity {
 	
-	private static final String userType = "Patient";
+	private static final String userType = "Doctor";
 	
 	private EditText etUserName, etPassword, etConfirmPassword;
 	private Button btnCreateAccount;
@@ -19,12 +19,12 @@ public class PatientAccount extends Activity {
 	
 	//Database connection
 	final DatabaseHandler db = new DatabaseHandler(this);
-	private int patientUserId; 
+	private int doctorUserId; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_patient_account);
+		setContentView(R.layout.activity_doctor_account);
 		
 		etUserName = (EditText) findViewById(R.id.etUserName);
 		etPassword = (EditText) findViewById(R.id.etPassword);
@@ -41,9 +41,9 @@ public class PatientAccount extends Activity {
 				
 				if(password.equals(confirmPassword)){
 					db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
-					patientUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
+					doctorUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
 					Intent i = new Intent(getBaseContext(), PatientRegistration.class);
-					i.putExtra("PatientUserId", patientUserId);
+					i.putExtra("DoctorUserId", doctorUserId);
 					startActivity(i);
 					
 				} else {
@@ -59,7 +59,7 @@ public class PatientAccount extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.patient_account, menu);
+		getMenuInflater().inflate(R.menu.doctor_account, menu);
 		return true;
 	}
 

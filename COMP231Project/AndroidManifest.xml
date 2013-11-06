@@ -66,20 +66,28 @@
             android:label="@string/title_activity_receptionist" >
         </activity>
         <activity
-            android:name="com.example.ezhealth.ReceptionistPatientSearch"
-            android:label="@string/title_activity_receptionist_patient_search" >
+            android:name="com.example.ezhealth.Doctor"
+            android:label="@string/title_activity_doctor" >
         </activity>
         <activity
-            android:name="com.example.ezhealth.ReceptionistDoctorSearch"
-            android:label="@string/title_activity_receptionist_doctor_search" >
+            android:name="com.example.ezhealth.AddDoctor"
+            android:label="@string/title_activity_add_doctor" >
         </activity>
         <activity
-            android:name="com.example.ezhealth.ReceptionistPatientProfileView"
-            android:label="@string/title_activity_receptionist_patient_profile_view" >
+            android:name="com.example.ezhealth.AddReceptionist"
+            android:label="@string/title_activity_add_receptionist" >
         </activity>
         <activity
-            android:name="com.example.ezhealth.ReceptionistDoctorProfileView"
-            android:label="@string/title_activity_receptionist_doctor_profile_view" >
+            android:name="com.example.ezhealth.Addnurse"
+            android:label="@string/title_activity_addnurse" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AddPharmacist"
+            android:label="@string/title_activity_add_pharmacist" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.DoctorAccount"
+            android:label="@string/title_activity_doctor_account" >
         </activity>
     </application>
 

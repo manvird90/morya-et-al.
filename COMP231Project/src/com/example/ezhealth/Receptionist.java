@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Receptionist extends Activity {
 
-	private Button btnRegisterPatient, btnSearchPatientInfo, btnSearchDoctorInfo;
+	private Button btnRegisterPatient;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,26 +20,6 @@ public class Receptionist extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getBaseContext(), PatientAccount.class);
-				startActivity(i);
-			}
-		});
-		
-		btnSearchPatientInfo = (Button) findViewById(R.id.btnSearchPatientInfo);
-		btnSearchPatientInfo.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(getBaseContext(), ReceptionistPatientSearch.class);
-				startActivity(i);
-			}
-		});
-		
-		btnSearchDoctorInfo = (Button) findViewById(R.id.btnSearchDoctorInfo);
-		btnSearchDoctorInfo.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(getBaseContext(), ReceptionistDoctorSearch.class);
 				startActivity(i);
 			}
 		});

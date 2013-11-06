@@ -11,10 +11,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PatientRegistration" >
+    tools:context=".AddDoctor" >
 
     <TextView
-        android:id="@+id/lblTitlePatiReg"
+        android:id="@+id/lblTitleAddDoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -27,7 +27,7 @@
         android:id="@+id/tbPersonalInfo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lblTitlePatiReg"
+        android:layout_below="@+id/lblTitleAddDoc"
         android:layout_marginTop="25dp" >
 
         <TableRow
@@ -271,18 +271,18 @@
          </TableRow>
          
           <TableRow
-            android:id="@+id/trInsurance"
+            android:id="@+id/trExp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/lblInsurance"
+                android:id="@+id/lblExp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Health Policy No." />
+                android:text="Years Of experience" />
             
             <EditText
-       			android:id="@+id/txtInsurance"
+       			android:id="@+id/txtExp"
         		android:layout_width="130dp"
         		android:layout_height="wrap_content"
         		android:ems="10">
@@ -290,18 +290,18 @@
          </TableRow>
          
          <TableRow
-            android:id="@+id/trInsurComp"
+            android:id="@+id/trSpeciality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/lblInsurComp"
+                android:id="@+id/lblSpeciality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Company Name" />
+                android:text="Speciality" />
             
             <EditText
-       			android:id="@+id/txtInsurComp"
+       			android:id="@+id/txtSpeciality"
         		android:layout_width="130dp"
         		android:layout_height="wrap_content">
     		</EditText>
@@ -310,9 +310,10 @@
     </TableLayout>
  
     
-    <!-- second table for vital information -->
+ 
+    <!-- second table for vital information 
     <TextView
-        android:id="@+id/lblTitleVitalInfo"
+        android:id="@+id/lblTit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -425,13 +426,13 @@
         </TableRow>
         
         
-    </TableLayout>
+    </TableLayout>-->
 
      <Button
-        android:id="@+id/btnRegisterPatient"
+        android:id="@+id/btnAddDoctor"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tbVitalInfo"
+        android:layout_below="@+id/tbPersonalInfo"
         android:text="Register" />
 </RelativeLayout>
 
