@@ -68,11 +68,18 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
   //Doctor Registration
 
-    private static final String TABLE_ADD_DOC = "DocReg";
+    private static final String TABLE_DOCTORREG = "doctorreg";
     private static final String COL_DOCTORID = "DoctorId";//PrimaryKey
     private static final String COL_DOCTORLOGINID = "DoctorLoginId";//Foreign Key
     private static final String COL_EXP = "Experience";
     private static final String COL_SPECIALITY = "Speciality";
+    
+    // Receptionist Registration
+    private static final String TABLE_RECREG = "RecReg";
+    private static final String COL_RECEPTIONISTID = "ReceptionistId";//PrimaryKey
+    private static final String COL_RECEPTIONISTLOGINID = "ReceptionistLoginId";//Foreign Key
+    private static final String COL_SCHEDULE = "Schedule";
+    private static final String COL_OTHER = "Other";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -143,7 +150,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         
         db.execSQL(CREATE_VITALINFO_TABLE);
         
-        String CREATE_ADD_DOC_TABLE = "CREATE TABLE " + TABLE_ADD_DOC + "("
+        String CREATE_DOCTORREG_TABLE = "CREATE TABLE " + TABLE_DOCTORREG + "("
                 + COL_DOCTORID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_DOCTORLOGINID + " INTEGER NOT NULL UNIQUE, "
         		+ COL_FIRSTNAME + " TEXT NOT NULL, "
@@ -162,7 +169,29 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                + COL_SPECIALITY + " TEXT NOT NULL, "
                + "FOREIGN KEY ("+COL_DOCTORLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
 
-        db.execSQL(CREATE_ADD_DOC_TABLE);
+        db.execSQL(CREATE_DOCTORREG_TABLE);
+        //create receptionust table
+        
+        String CREATE_RECREG_TABLE = "CREATE TABLE " + TABLE_RECREG + "("
+                + COL_RECEPTIONISTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + COL_RECEPTIONISTLOGINID + " INTEGER NOT NULL UNIQUE, "
+        		+ COL_FIRSTNAME + " TEXT NOT NULL, "
+                + COL_LASTNAME + " TEXT NOT NULL, "
+                + COL_GENDER + " TEXT NOT NULL, "
+                + COL_DOB + " TEXT NOT NULL, "//make it not null
+                + COL_EMAIL + " TEXT NOT NULL, "
+                + COL_PHONE + " TEXT NOT NULL, "
+                + COL_APARTMENT + " TEXT NOT NULL, "
+                + COL_STREET + " TEXT NOT NULL, "
+                + COL_CITY + " TEXT NOT NULL, "
+                + COL_PROVINCE + " TEXT NOT NULL, "
+                + COL_COUNTRY + " TEXT NOT NULL, "
+                + COL_POSTALCODE + " TEXT NOT NULL, "
+                + COL_SCHEDULE + " TEXT NOT NULL, "
+               + COL_OTHER + " TEXT NOT NULL, "
+               + "FOREIGN KEY ("+COL_RECEPTIONISTLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
+
+        db.execSQL(CREATE_RECREG_TABLE);
         
     	} catch (SQLException e) {
     		e.printStackTrace();
@@ -181,7 +210,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMINREG);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENTREG);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VITALINFO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADD_DOC);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOCTORREG);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECREG);
+        
         // Create tables again
         onCreate(db);
 
@@ -232,6 +263,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	return id;
     }
     //method to add admin by sachin patel - return admin class
+    
     public void addAdmin(Admin ad) {
         SQLiteDatabase db = this.getWritableDatabase();
      
@@ -345,14 +377,53 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COL_SPECIALITY, dt.getSpeciality()); 
      
         // Inserting Row
-        db.insert(TABLE_ADD_DOC, null, values);
+        db.insert(TABLE_DOCTORREG, null, values);
         db.close(); // Closing database connection
     }
     
-    public int getDoctorId(String firstName, String lastName, int DoctorLoginId){
+    public int getDoctorId(String firstName, String lastName, int doctorLoginId){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADD_DOC+" where "+COL_DOCTORLOGINID+" = "+
-        							DoctorLoginId+" and "+COL_FIRSTNAME+" = \""+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTORREG+" where "+COL_DOCTORLOGINID+" = "+
+        							doctorLoginId+" and "+COL_FIRSTNAME+" = \""+
+        							firstName+"\" and "+COL_LASTNAME+" = \""+
+        							lastName+"\"", null);
+        cursor.moveToFirst();
+    	int id =  cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return id;
+    	
+    }
+    //receptionist---manvir
+    public void addReceptionist(Receptionist rt) {
+        SQLiteDatabase db = this.getWritableDatabase();
+     
+        ContentValues values = new ContentValues();
+        values.put(COL_RECEPTIONISTLOGINID, rt.getReceptionistLoginId()); 
+        values.put(COL_FIRSTNAME, rt.getFirstName()); 
+        values.put(COL_LASTNAME, rt.getLastName()); 
+        values.put(COL_GENDER, rt.getGender()); 
+        values.put(COL_DOB, rt.getDateOfBirth()); 
+        values.put(COL_EMAIL, rt.getEmail());
+        values.put(COL_PHONE, rt.getPhone()); 
+        values.put(COL_APARTMENT, rt.getApartment());
+        values.put(COL_STREET, rt.getStreet());
+        values.put(COL_CITY, rt.getStreet());
+        values.put(COL_PROVINCE, rt.getProvince());
+        values.put(COL_COUNTRY, rt.getCountry());
+        values.put(COL_POSTALCODE, rt.getPostalCode());
+        values.put(COL_SCHEDULE, rt.getSchedule());
+        values.put(COL_OTHER, rt.getOther()); 
+     
+        // Inserting Row
+        db.insert(TABLE_RECREG, null, values);
+        db.close(); // Closing database connection
+    }
+    
+    public int getReceptionistId(String firstName, String lastName, int receptionistLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_RECREG+" where "+COL_RECEPTIONISTLOGINID+" = "+
+        							receptionistLoginId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
         cursor.moveToFirst();
