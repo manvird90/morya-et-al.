@@ -2,7 +2,7 @@ package com.example.ezhealth;
 
 import java.io.Serializable;
 
-public class Admin implements Serializable {
+public class Admin implements Serializable{
 	int _adminId;
 	int _userLoginId;
 	String _dateOfBirth;

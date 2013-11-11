@@ -1,7 +1,5 @@
 package com.example.ezhealth;
 
-
-
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -40,6 +39,7 @@ public class MainActivity extends Activity {
 		final DatabaseHandler db = new DatabaseHandler(this);
 		//adding default user account for hospitaladmin
 		Log.d("Insert: " , "Default Users");
+		db.addAdminKey(md5("HospitalAdminEzHealth"));
 		db.addUser(new UserLogin("HospitalAdmin","admin", md5("admin")));
 		db.addUser(new UserLogin("Patient","patient", md5("patient")));
 		db.addUser(new UserLogin("LabStaff","labstaff", md5("labstaff")));
@@ -74,6 +74,19 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = null;
+	    switch (item.getItemId()) {
+	        case R.id.adminRegistration:
+	        	intent = new Intent(this,AdminAccount.class);
+	    
+	     }
+	    startActivity(intent);
+        return true;
+        
 	}
 	
 	//md5 encryption method

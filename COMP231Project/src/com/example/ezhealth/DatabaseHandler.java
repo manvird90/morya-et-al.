@@ -12,6 +12,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "ezhealth.db";
     
+    //ADMINKEY TABLE variable
+    private static final String TABLE_ADMINKEY = "AdminKey";
+    private static final String COL_ADMINKEYID = "AdminKeyId";
+    private static final String COL_ADMINKEY = "AdminKey";
+    
+    //USERLOGIN TABLE variable
     private static final String TABLE_USERLOGIN = "UserLogin";
     private static final String COL_USERLOGINID = "userLoginId";
     private static final String COL_USERNAME = "userName";
@@ -56,6 +62,27 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String COL_EXP = "Experience";
     private static final String COL_SPECIALITY = "Speciality";
 
+    
+    //ADMIN REGISTARION BY SACHIN PATEL
+    
+    //Admin Registration Table
+    private static final String TABLE_ADMINREG = "AdminReg";
+    private static final String COL_ADMINID = "AdminId";//PrimaryKey
+    private static final String COL_ADMINLOGINID = "AdminLoginId";//Foreign Key
+    private static final String COL_ADMINFIRSTNAME = "FirstName";
+    private static final String COL_ADMINLASTNAME = "LastName";
+    private static final String COL_ADMINDOB = "DateOfBirth";
+    private static final String COL_ADMINEMAIL = "Email";
+    private static final String COL_ADMINPHONE = "Phone";
+    private static final String COL_ADMINGENDER = "Gender";
+    private static final String COL_ADMINAPARTMENT = "Apartment";
+    private static final String COL_ADMINSTREET = "Street";
+    private static final String COL_ADMINCITY = "City";
+    private static final String COL_ADMINPROVINCE = "Province";
+    private static final String COL_ADMINCOUNTRY = "Country";
+    private static final String COL_ADMINPOSTALCODE = "PostalCode";
+    
+    
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -64,6 +91,16 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
     	try{
+    		
+    		//Admin key table by jignesh patel
+    		
+    		String CREATE_ADMINKEY_TABLE = "CREATE TABLE " + TABLE_ADMINKEY + "("
+                    + COL_ADMINKEYID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+            		+ COL_ADMINKEY + " TEXT NOT NULL)";
+            
+            db.execSQL(CREATE_ADMINKEY_TABLE);
+    		
+    	//USERLOGIN TABLE for main page by jignesh patel	
     	String CREATE_USERLOGIN_TABLE = "CREATE TABLE " + TABLE_USERLOGIN + "("
                 + COL_USERLOGINID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
         		+ COL_USERTYPE + " TEXT NOT NULL, "
@@ -71,6 +108,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         		+ COL_USERPASSWORD + " TEXT NOT NULL)";
         
         db.execSQL(CREATE_USERLOGIN_TABLE);
+        //Patient reg and vital info table by jignesh patel
+        
         //TOTAL 16 COLUMNS
         String CREATE_PATIENTREG_TABLE = "CREATE TABLE " + TABLE_PATIENTREG + "("
                 + COL_PATIENTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
@@ -92,7 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                + "FOREIGN KEY ("+COL_PATIENTLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
         
         db.execSQL(CREATE_PATIENTREG_TABLE);
-        
+       
         String CREATE_VITALINFO_TABLE = "CREATE TABLE " + TABLE_VITALINFO + "("
                 + COL_VITALINFOID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_VITALPATIENTID + " INTEGER NOT NULL UNIQUE, "
@@ -105,6 +144,28 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         
         db.execSQL(CREATE_VITALINFO_TABLE);
         
+        //ADMIN TABLE by sachin patel
+        
+        String CREATE_ADMINREG_TABLE = "CREATE TABLE " + TABLE_ADMINREG + "("
+                + COL_ADMINID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + COL_ADMINLOGINID + " INTEGER NOT NULL UNIQUE, " // FOREIGN KEY
+        		+ COL_ADMINFIRSTNAME + " TEXT NOT NULL, "
+                + COL_ADMINLASTNAME + " TEXT NOT NULL, "
+                + COL_ADMINGENDER + " TEXT NOT NULL, "
+                + COL_ADMINDOB + " TEXT NOT NULL, "//make it not null
+                + COL_ADMINEMAIL + " TEXT NOT NULL, "
+                + COL_ADMINPHONE + " TEXT NOT NULL, "
+                + COL_ADMINAPARTMENT + " TEXT NOT NULL, "
+                + COL_ADMINSTREET + " TEXT NOT NULL, "
+                + COL_ADMINCITY + " TEXT NOT NULL, "
+                + COL_ADMINPROVINCE + " TEXT NOT NULL, "
+                + COL_ADMINCOUNTRY + " TEXT NOT NULL, "
+                + COL_ADMINPOSTALCODE + " TEXT NOT NULL, "
+                + "FOREIGN KEY ("+COL_ADMINLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
+        
+        db.execSQL(CREATE_ADMINREG_TABLE);
+        
+//      Doctor table by manvir  
         String CREATE_ADD_DOC_TABLE = "CREATE TABLE " + TABLE_ADD_DOC + "("
                 + COL_DOCTORID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_DOCTORLOGINID + " INTEGER NOT NULL UNIQUE, "
@@ -147,6 +208,34 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         onCreate(db);
 
     	}
+    
+    //Methods by jignesh patel
+    
+    public void addAdminKey(String key) {
+        SQLiteDatabase db = this.getWritableDatabase();
+     
+        ContentValues values = new ContentValues();
+      //  values.put(COL_USERLOGINID, ul.getUserLoginId());
+        values.put(COL_ADMINKEYID, key);
+        db.insert(TABLE_ADMINKEY, null, values);
+        db.close(); // Closing database connection
+    }
+    
+    public boolean getAdminKey(String key) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADMINKEY+" where "+COL_ADMINKEY+" = \""+key+"\"", null);
+      boolean found;
+        if (cursor!=null) { 
+        	found =  true;
+        } else {
+        	found = false;
+        }
+        cursor.close();
+        db.close();
+        
+        return found;
+        
+    }
     
     public void addUser(UserLogin ul) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -193,7 +282,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	return id;
     }
     
-   
     
     public void addPatient(Patient pt) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -249,6 +337,46 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.insert(TABLE_VITALINFO, null, values);
         db.close(); // Closing database connection
     }
+
+    //method to add admin by sachin patel - return admin class
+    
+    public void addAdmin(Admin ad) {
+        SQLiteDatabase db = this.getWritableDatabase();
+     
+        ContentValues values = new ContentValues();
+        values.put(COL_ADMINLOGINID, ad.getAdminLoginId()); 
+        values.put(COL_FIRSTNAME, ad.getFirstName()); 
+        values.put(COL_LASTNAME, ad.getLastName()); 
+        values.put(COL_GENDER, ad.getGender()); 
+        values.put(COL_DOB, ad.getDateOfBirth()); 
+        values.put(COL_EMAIL, ad.getEmail());
+        values.put(COL_PHONE, ad.getPhone()); 
+        values.put(COL_APARTMENT, ad.getApartment());
+        values.put(COL_STREET, ad.getStreet());
+        values.put(COL_CITY, ad.getStreet());
+        values.put(COL_PROVINCE, ad.getProvince());
+        values.put(COL_COUNTRY, ad.getCountry());
+        values.put(COL_POSTALCODE, ad.getPostalCode());
+      
+        // Inserting Row
+        db.insert(TABLE_ADMINREG, null, values);
+        db.close(); // Closing database connection
+    }
+    
+    public int getAdminId(String firstName, String lastName, int adminLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADMINREG+" where "+COL_ADMINLOGINID+" = "+
+        							adminLoginId+" and "+COL_FIRSTNAME+" = \""+
+        							firstName+"\" and "+COL_LASTNAME+" = \""+
+        							lastName+"\"", null);
+        cursor.moveToFirst();
+    	int id =  cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return id;
+    	
+    }
+
     public void addDoctor(Doctor dt) {
         SQLiteDatabase db = this.getWritableDatabase();
      
