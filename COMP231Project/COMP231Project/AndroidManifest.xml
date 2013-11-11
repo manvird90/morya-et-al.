@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ezhealth"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- android:theme="@android:style/Theme.Dialog" -->
+
+        <activity
+            android:name="com.example.ezhealth.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.HospitalAdmin"
+            android:label="@string/title_activity_hospital_admin" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.PatientRegistration"
+            android:label="@string/title_activity_patient_registration" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.DoctorRegistration"
+            android:label="@string/title_activity_doctor_registration" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyC6KfkG-rrdCDVryPq9NT44fgeD7A52DFI" />
+
+        <activity
+            android:name="com.example.ezhealth.GoogleMapServices"
+            android:label="@string/title_activity_google_map_services" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.PatientAccount"
+            android:label="@string/title_activity_patient_account" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.Receptionist"
+            android:label="@string/title_activity_receptionist" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.Doctor"
+            android:label="@string/title_activity_doctor" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AddDoctor"
+            android:label="@string/title_activity_add_doctor" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AddReceptionist"
+            android:label="@string/title_activity_add_receptionist" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.Addnurse"
+            android:label="@string/title_activity_addnurse" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AddPharmacist"
+            android:label="@string/title_activity_add_pharmacist" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.DoctorAccount"
+            android:label="@string/title_activity_doctor_account" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistPatientSearch"
+            android:label="@string/title_activity_receptionist_patient_search" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistDoctorSearch"
+            android:label="@string/title_activity_receptionist_doctor_search" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistPatientProfileView"
+            android:label="@string/title_activity_receptionist_patient_profile_view" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistDoctorProfileView"
+            android:label="@string/title_activity_receptionist_doctor_profile_view" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AdminAccount"
+            android:label="@string/title_activity_admin_account" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AdminRegistration"
+            android:label="@string/title_activity_admin_registration" >
+        </activity>
+    </application>
+
+</manifest>
