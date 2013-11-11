@@ -42,7 +42,7 @@ public class DoctorAccount extends Activity {
 				if(password.equals(confirmPassword)){
 					db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
 					doctorUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
-					Intent i = new Intent(getBaseContext(), PatientRegistration.class);
+					Intent i = new Intent(getBaseContext(), AddDoctor.class);
 					i.putExtra("DoctorUserId", doctorUserId);
 					startActivity(i);
 					

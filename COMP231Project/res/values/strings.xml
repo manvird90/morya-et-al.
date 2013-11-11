@@ -39,5 +39,11 @@
     <string name="title_activity_addnurse">Addnurse</string>
     <string name="title_activity_add_pharmacist">AddPharmacist</string>
     <string name="title_activity_doctor_account">DoctorAccount</string>
+    <string name="title_activity_receptionist_patient_search">ReceptionistPatientSearch</string>
+    <string name="title_activity_receptionist_doctor_search">ReceptionistDoctorSearch</string>
+    <string name="title_activity_receptionist_patient_profile_view">ReceptionistPatientProfile</string>
+    <string name="title_activity_receptionist_doctor_profile_view">ReceptionistDoctorProfile</string>
+    <string name="title_activity_admin_account">AdminAccount</string>
+    <string name="title_activity_admin_registration">AdminRegistration</string>
 
 </resources>

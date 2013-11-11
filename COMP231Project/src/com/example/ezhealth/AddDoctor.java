@@ -37,9 +37,8 @@ public class AddDoctor extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_doctor);
-		Bundle bundle = this.getIntent().getExtras();
+		Bundle bundle = getIntent().getExtras();
 		doctorLoginId = bundle.getInt("DoctorUserId");
-		
 		
 		//personalInformation
 		etFirstName = (EditText) findViewById(R.id.txtFirstName);

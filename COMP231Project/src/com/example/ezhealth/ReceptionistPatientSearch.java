@@ -1,17 +1,20 @@
 package com.example.ezhealth;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ReceptionistPatientSearch extends Activity {
 
 	private EditText etFirstName, etLastName, etPatientId;
 	private Button btnSearchPatient;
-	private String firstName, lastName, patientId;
+	private String firstName, lastName;
+	private int patientId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +25,43 @@ public class ReceptionistPatientSearch extends Activity {
 		etPatientId = (EditText) findViewById(R.id.etPatientId);
 		btnSearchPatient = (Button) findViewById(R.id.btnSearchPatient);
 		
+		
+		final DatabaseHandler db = new DatabaseHandler(this);
 		btnSearchPatient.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				patientId = Integer.parseInt(etPatientId.getText().toString());
+				firstName = etFirstName.getText().toString();
+				lastName = etLastName.getText().toString();
 				
+				//Patient instance
+				Patient patient = new Patient();
+				//checking all three inputs do have values
+				if (patientId!=0){
+					if (firstName != ""){
+						if(lastName != ""){
+							patient = db.getPatient(patientId, firstName, lastName);
+						} else {
+							Toast.makeText(getBaseContext(), "Last name is required !", Toast.LENGTH_SHORT).show();
+						}
+					} else {
+						Toast.makeText(getBaseContext(), "First name is required !", Toast.LENGTH_SHORT).show();
+					}
+				} else {
+					Toast.makeText(getBaseContext(), "Correct patient id is required !", Toast.LENGTH_SHORT).show();
+				}
+				
+				if (patient.getPatientId() != 0){
+					
+					Intent intent = new Intent(getBaseContext(), ReceptionistPatientProfileView.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("patient", patient);
+					intent.putExtras(bundle);
+					startActivity(intent);
+				} else {
+					Toast.makeText(getBaseContext(), "No patient id found having such information!", Toast.LENGTH_SHORT).show();
+				}
 				
 			}
 		});

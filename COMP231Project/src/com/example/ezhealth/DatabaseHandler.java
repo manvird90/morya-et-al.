@@ -50,10 +50,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
   //Doctor Registration
 
-    private static final String TABLE_ADDDOC = "AddDoc";
+    private static final String TABLE_ADD_DOC = "DocReg";
     private static final String COL_DOCTORID = "DoctorId";//PrimaryKey
     private static final String COL_DOCTORLOGINID = "DoctorLoginId";//Foreign Key
-    private static final String COL_EXPERIENCE = "Experience";
+    private static final String COL_EXP = "Experience";
     private static final String COL_SPECIALITY = "Speciality";
 
     public DatabaseHandler(Context context) {
@@ -71,10 +71,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         		+ COL_USERPASSWORD + " TEXT NOT NULL)";
         
         db.execSQL(CREATE_USERLOGIN_TABLE);
-        
+        //TOTAL 16 COLUMNS
         String CREATE_PATIENTREG_TABLE = "CREATE TABLE " + TABLE_PATIENTREG + "("
                 + COL_PATIENTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
-                + COL_PATIENTLOGINID + " INTEGER NOT NULL UNIQUE, "
+                + COL_PATIENTLOGINID + " INTEGER NOT NULL UNIQUE, " // FOREIGN KEY
         		+ COL_FIRSTNAME + " TEXT NOT NULL, "
                 + COL_LASTNAME + " TEXT NOT NULL, "
                 + COL_GENDER + " TEXT NOT NULL, "
@@ -105,7 +105,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         
         db.execSQL(CREATE_VITALINFO_TABLE);
         
-        String CREATE_ADDDOC_TABLE = "CREATE TABLE " + TABLE_ADDDOC + "("
+        String CREATE_ADD_DOC_TABLE = "CREATE TABLE " + TABLE_ADD_DOC + "("
                 + COL_DOCTORID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_DOCTORLOGINID + " INTEGER NOT NULL UNIQUE, "
         		+ COL_FIRSTNAME + " TEXT NOT NULL, "
@@ -120,11 +120,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 + COL_PROVINCE + " TEXT NOT NULL, "
                 + COL_COUNTRY + " TEXT NOT NULL, "
                 + COL_POSTALCODE + " TEXT NOT NULL, "
-                + COL_EXPERIENCE + " TEXT NOT NULL, "
+                + COL_EXP + " TEXT NOT NULL, "
                + COL_SPECIALITY + " TEXT NOT NULL, "
                + "FOREIGN KEY ("+COL_DOCTORLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
 
-        db.execSQL(CREATE_ADDDOC_TABLE);
+        db.execSQL(CREATE_ADD_DOC_TABLE);
         
     	} catch (SQLException e) {
     		e.printStackTrace();
@@ -142,7 +142,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERLOGIN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENTREG);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VITALINFO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADDDOC);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADD_DOC);
         // Create tables again
         onCreate(db);
 
@@ -266,17 +266,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COL_PROVINCE, dt.getProvince());
         values.put(COL_COUNTRY, dt.getCountry());
         values.put(COL_POSTALCODE, dt.getPostalCode());
-        values.put(COL_EXPERIENCE, dt.getExp());
+        values.put(COL_EXP, dt.getExp());
         values.put(COL_SPECIALITY, dt.getSpeciality()); 
      
         // Inserting Row
-        db.insert(TABLE_ADDDOC, null, values);
+        db.insert(TABLE_ADD_DOC, null, values);
         db.close(); // Closing database connection
     }
     
     public int getDoctorId(String firstName, String lastName, int DoctorLoginId){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADDDOC+" where "+COL_DOCTORLOGINID+" = "+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADD_DOC+" where "+COL_DOCTORLOGINID+" = "+
         							DoctorLoginId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
@@ -286,6 +286,36 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	db.close();
     	return id;
     	
+    }
+    
+    //method to get patient by jignesh patel - return patient class
+    public Patient getPatient(int patientId, String firstName, String lastName){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENTREG+" where "+COL_PATIENTID+" = "+
+        							patientId+" and "+COL_FIRSTNAME+" = \""+
+        							firstName+"\" and "+COL_LASTNAME+" = \""+
+        							lastName+"\"", null);
+        cursor.moveToFirst();
+        Patient patient = new Patient();
+        patient.setPatientId(cursor.getInt(0));
+        patient.setPatientLoginId(cursor.getInt(1));
+        patient.setFirstName(cursor.getString(2));
+        patient.setLastName(cursor.getString(3));
+        patient.setGender(cursor.getString(4));
+        patient.setDateOfBirth(cursor.getString(5));
+        patient.setEmail(cursor.getString(6));
+        patient.setPhone(cursor.getString(7));
+        patient.setApartment(cursor.getString(8));
+        patient.setStreet(cursor.getString(9));
+        patient.setCity(cursor.getString(10));
+        patient.setProvince(cursor.getString(11));
+        patient.setCountry(cursor.getString(12));
+        patient.setPostalCode(cursor.getString(13));
+        patient.setHealthPolicyNumber(cursor.getString(14));
+        patient.setInsuranceCompany(cursor.getString(15));
+    	cursor.close();
+    	db.close();
+    	return patient;
     }
 
 }

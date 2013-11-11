@@ -89,6 +89,30 @@
             android:name="com.example.ezhealth.DoctorAccount"
             android:label="@string/title_activity_doctor_account" >
         </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistPatientSearch"
+            android:label="@string/title_activity_receptionist_patient_search" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistDoctorSearch"
+            android:label="@string/title_activity_receptionist_doctor_search" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistPatientProfileView"
+            android:label="@string/title_activity_receptionist_patient_profile_view" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistDoctorProfileView"
+            android:label="@string/title_activity_receptionist_doctor_profile_view" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AdminAccount"
+            android:label="@string/title_activity_admin_account" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AdminRegistration"
+            android:label="@string/title_activity_admin_registration" >
+        </activity>
     </application>
 
 </manifest>

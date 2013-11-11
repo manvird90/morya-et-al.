@@ -2,8 +2,8 @@ package com.example.ezhealth;
 
 import java.io.Serializable;
 
-public class Doctor implements Serializable {
-	int _doctorId;
+public class Admin implements Serializable {
+	int _adminId;
 	int _userLoginId;
 	String _dateOfBirth;
     String _firstName;
@@ -17,14 +17,12 @@ public class Doctor implements Serializable {
     String _province;
     String _country;
     String _postalCode;
-    String _exp;
-    String _speciality;
-    
-    public Doctor(){
+   
+    public Admin(){
     	
     }
-    public Doctor(int uid, String firstName, String lastName, String gender, String dob, String email, String phone, String apt, String street,
-    		String city, String province, String country, String postalCode, String exp, String spl){
+    public Admin(int uid, String firstName, String lastName, String gender, String dob, String email, String phone, String apt, String street,
+    		String city, String province, String country, String postalCode){
     	
         this._userLoginId=uid;
         this._firstName=firstName;
@@ -39,14 +37,13 @@ public class Doctor implements Serializable {
         this._phone = phone;
         this._country = country;
         this._postalCode = postalCode;
-        this._exp = exp;
-        this._speciality = spl;
+       
     }
     
     
-    public Doctor(int did, int uid, String firstName, String lastName, String gender, String dob, String email, String phone, String apt, String street,
-    		String city, String province, String country, String postalCode, String exp, String spl){
-    	this._doctorId=did;
+    public Admin(int aid, int uid, String firstName, String lastName, String gender, String dob, String email, String phone, String apt, String street,
+    		String city, String province, String country, String postalCode){
+    	this._adminId=aid;
         this._userLoginId=uid;
         this._firstName=firstName;
         this._lastName=lastName;
@@ -60,22 +57,21 @@ public class Doctor implements Serializable {
         this._phone = phone;
         this._country = country;
         this._postalCode = postalCode;
-        this._exp = exp;
-        this._speciality = spl;
+        
     }
     
     // getting ID
-    public int getDoctorId(){
-        return this._doctorId;
+    public int getAdminId(){
+        return this._adminId;
     }
-    public void setDoctorId(int id){
-        this._doctorId = id;
+    public void setAdminId(int id){
+        this._adminId = id;
     }
     
-    public int getDoctorLoginId(){
+    public int getAdminLoginId(){
         return this._userLoginId;
     }
-    public void setDoctorLoginId(int id){
+    public void setAdminLoginId(int id){
         this._userLoginId = id;
     }
     
@@ -162,24 +158,8 @@ public class Doctor implements Serializable {
     }
     public void setPostalCode(String pc){
         this._postalCode =pc;
-    }
-    
-    public String getExp(){
-        return this._exp;
-    }
-    public void setExp(String exp){
-        this._exp =exp;
-    }
-    
-    public String getSpeciality(){
-        return this._speciality;
-    }
-    public void setSpeciality(String spl){
-        this._speciality = spl;
-    }
-    
-    
 }
+    }
 
 
 

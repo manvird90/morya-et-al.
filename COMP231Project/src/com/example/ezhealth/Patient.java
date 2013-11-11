@@ -1,8 +1,8 @@
 package com.example.ezhealth;
 
-import java.sql.Date;
+import java.io.Serializable;
 
-public class Patient {
+public class Patient implements Serializable{
 	int _patientId;
 	int _userLoginId;
 	String _dateOfBirth;
