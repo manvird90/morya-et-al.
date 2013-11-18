@@ -40,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="30sp" >
+       
         <Button
         android:id="@+id/btnSearchPatientInfo"
         android:layout_width="wrap_content"
@@ -51,6 +52,37 @@
         android:paddingLeft="25sp"
         android:paddingRight="25sp"
         android:drawablePadding="-15sp"/>
+        <Button
+        android:id="@+id/btnAllPatients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/btn_receptionist_all_patients"
+        android:textColor="#FFFFFF"
+        android:paddingTop="25sp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
+        android:drawablePadding="-15sp"/>
      </TableRow>
+     
+        <TableRow
+        android:id="@+id/trAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30sp" >
+       
+        <Button
+        android:id="@+id/btnAllDoctors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/btn_receptionist_all_doctors"
+        android:textColor="#FFFFFF"
+        android:paddingTop="25sp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
+        android:drawablePadding="-15sp"/>
+        
+        </TableRow>
 
 </TableLayout>

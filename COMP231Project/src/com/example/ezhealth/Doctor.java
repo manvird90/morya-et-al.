@@ -19,12 +19,13 @@ public class Doctor implements Serializable {
     String _postalCode;
     String _exp;
     String _speciality;
+    int _departmentId;
     
     public Doctor(){
     	
     }
     public Doctor(int uid, String firstName, String lastName, String gender, String dob, String email, String phone, String apt, String street,
-    		String city, String province, String country, String postalCode, String exp, String spl){
+    		String city, String province, String country, String postalCode, String exp, String spl, int deptId){
     	
         this._userLoginId=uid;
         this._firstName=firstName;
@@ -41,11 +42,12 @@ public class Doctor implements Serializable {
         this._postalCode = postalCode;
         this._exp = exp;
         this._speciality = spl;
+        this._departmentId = deptId;
     }
     
     
     public Doctor(int did, int uid, String firstName, String lastName, String gender, String dob, String email, String phone, String apt, String street,
-    		String city, String province, String country, String postalCode, String exp, String spl){
+    		String city, String province, String country, String postalCode, String exp, String spl, int deptId){
     	this._doctorId=did;
         this._userLoginId=uid;
         this._firstName=firstName;
@@ -62,6 +64,7 @@ public class Doctor implements Serializable {
         this._postalCode = postalCode;
         this._exp = exp;
         this._speciality = spl;
+        this._departmentId = deptId;
     }
     
     // getting ID
@@ -70,6 +73,14 @@ public class Doctor implements Serializable {
     }
     public void setDoctorId(int id){
         this._doctorId = id;
+    }
+    
+    // getting ID
+    public int getDepartmentId(){
+        return this._departmentId;
+    }
+    public void setDepartmentId(int deptId){
+        this._departmentId = deptId;
     }
     
     public int getDoctorLoginId(){

@@ -113,6 +113,22 @@
             android:name="com.example.ezhealth.AdminRegistration"
             android:label="@string/title_activity_admin_registration" >
         </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistScheduleAppointment"
+            android:label="@string/title_activity_receptionist_schedule_appointment" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AdminDoctorSearchToAddSchedule"
+            android:label="@string/title_activity_admin_doctor_search_to_add_schedule" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AdminAddDoctorSchedule"
+            android:label="@string/title_activity_admin_add_doctor_schedule" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistViewAllPatients"
+            android:label="@string/title_activity_receptionist_view_all_patients" >
+        </activity>
     </application>
 
 </manifest>

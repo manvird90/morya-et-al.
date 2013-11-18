@@ -28,6 +28,7 @@ public class PatientRegistration extends Activity {
 	private Date dob;
 	private EditText etFirstName, etLastName, etEmail, etPhone, etDateOfBirth, etApartment, etStreet, etCity, etProvince, etCountry, etPostalCode, etHealthPolicyNumber, etInsuranceCompany;
 	private EditText etHeight, etWeight, etAllergy, etDiseaseHistory, etChronicDisease;
+	private int displayPatientId;
 	
 	
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -105,7 +106,7 @@ public class PatientRegistration extends Activity {
 				pt.setInsuranceCompany(etInsuranceCompany.getText().toString());
 				
 				Log.d("Insert: " , "Patient" +etFirstName.getText().toString()+" "+ etLastName.getText().toString());
-				db.addPatient(pt);
+				displayPatientId = db.addPatient(pt);
 				patientId = db.getPatientId(etFirstName.getText().toString(), etLastName.getText().toString(), patientLoginId);
 				
 				PatientVital pv = new PatientVital();
@@ -119,7 +120,7 @@ public class PatientRegistration extends Activity {
 				Log.d("Insert: " , "Vital information of Patient having Id:"+ patientId);
 				db.addVitalInfo(pv);
 				db.close();
-				Toast.makeText(getBaseContext(),"Patient registration successful", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(),"Patient id is "+ displayPatientId, Toast.LENGTH_SHORT).show();
 				} else {
 
 					Toast.makeText(getBaseContext(),"Not able to register patient", Toast.LENGTH_SHORT).show();

@@ -1,20 +1,25 @@
 package com.example.ezhealth;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddDoctor extends Activity {
@@ -27,7 +32,9 @@ public class AddDoctor extends Activity {
 	private String gender;
 	private Date dob;
 	private EditText etFirstName, etLastName, etEmail, etPhone, etDateOfBirth, etApartment, etStreet, etCity, etProvince, etCountry, etPostalCode, etExp, etSpeciality;
-	
+	private Spinner department;
+	private ArrayList<String> deptList;
+	private int displayDoctorId;
 	
 	
 	final DatabaseHandler db = new DatabaseHandler(this);
@@ -54,6 +61,10 @@ public class AddDoctor extends Activity {
 		etPostalCode = (EditText) findViewById(R.id.txtPostalCode);
 		etExp = (EditText) findViewById(R.id.txtExp);
 		etSpeciality = (EditText) findViewById(R.id.txtSpeciality);
+		department = (Spinner) findViewById(R.id.spinnerDeptartment);
+		
+		deptList = db.getDepartmentList();
+		department.setAdapter(new MyAdapter(deptList));
 		
 		
 		//RadioGroup Event
@@ -75,8 +86,8 @@ public class AddDoctor extends Activity {
 				    rbGender = (RadioButton) rgGender.getChildAt(radioId);
 				    gender = (String) rbGender.getText();
 				} 
-				
 					
+				int deptId = department.getSelectedItemPosition();
 				
 				Doctor dt = new Doctor();
 				dt.setDoctorLoginId(doctorLoginId);
@@ -94,13 +105,14 @@ public class AddDoctor extends Activity {
 				dt.setPostalCode(etPostalCode.getText().toString());
 				dt.setExp(etExp.getText().toString());
 				dt.setSpeciality(etSpeciality.getText().toString());
+				dt.setDepartmentId(deptId+1);//because department id start with 1 and spinner with 0
 				
 				Log.d("Insert: " , "Doctor" +etFirstName.getText().toString()+" "+ etLastName.getText().toString());
-				db.addDoctor(dt);
+				displayDoctorId = db.addDoctor(dt);
 				doctorId = db.getDoctorId(etFirstName.getText().toString(), etLastName.getText().toString(), doctorLoginId);
 				
 				db.close();
-				Toast.makeText(getBaseContext(),"Doctor registration successful", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(),"Doctor id is " + displayDoctorId, Toast.LENGTH_SHORT).show();
 				} else {
 
 					Toast.makeText(getBaseContext(),"Not able to register doctor", Toast.LENGTH_SHORT).show();
@@ -166,5 +178,62 @@ public class AddDoctor extends Activity {
 		return false;
 	}
 		
+	
+    private class MyAdapter extends BaseAdapter implements SpinnerAdapter {
+
+        /**
+         * The internal data (the ArrayList with the Objects).
+         */
+        private final ArrayList<String> dept;
+
+        public MyAdapter(ArrayList<String> dept) {
+            this.dept = dept;
+        }
+
+        /**
+         * Returns the Size of the ArrayList
+         */
+        @Override
+        public int getCount() {
+            return dept.size();
+        }
+
+        /**
+         * Returns one Element of the ArrayList
+         * at the specified position.
+         */
+        @Override
+        public Object getItem(int position) {
+            return dept.get(position);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+        /**
+         * Returns the View that is shown when a element was
+         * selected.
+         */
+        @Override
+        public View getView(int position, View recycle, ViewGroup parent) {
+            TextView text;
+            if (recycle != null){
+                // Re-use the recycled view here!
+                text = (TextView) recycle;
+            } else {
+                // No recycled view, inflate the "original" from the platform:
+                text = (TextView) getLayoutInflater().inflate(
+                        android.R.layout.simple_dropdown_item_1line, parent, false
+                );
+            }
+            text.setTextColor(Color.BLACK);
+            text.setText(dept.get(position));
+            return text;
+        }
+
+
+    }
+	
 }
 

@@ -48,6 +48,22 @@ public class MainActivity extends Activity {
 		db.addUser(new UserLogin("Pharmacist","pharmacist", md5("pharmacist")));
 		db.addUser(new UserLogin("Doctor","doctor", md5("doctor")));
 		
+		//add departments 
+		db.addDepartment("Anaesthetics");
+		db.addDepartment("Cardiology");
+		db.addDepartment("ENT");
+		db.addDepartment("Anaesthetics");
+		db.addDepartment("Critical Care");
+		db.addDepartment("General Surgery");
+		db.addDepartment("Gastroenterology");
+		db.addDepartment("Gynaecology");
+		db.addDepartment("Haematology");
+		db.addDepartment("Neurology");
+		db.addDepartment("Oncology");
+		db.addDepartment("Opthalmology");
+		db.addDepartment("Orthopaedics");
+		db.addDepartment("Radiology");
+		
 		//Login button click event
 		Button login = (Button)findViewById(R.id.btnLogin);
 		login.setOnClickListener(new OnClickListener() {
