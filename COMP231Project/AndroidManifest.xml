@@ -129,6 +129,14 @@
             android:name="com.example.ezhealth.ReceptionistViewAllPatients"
             android:label="@string/title_activity_receptionist_view_all_patients" >
         </activity>
+        <activity
+            android:name="com.example.ezhealth.Receptionistdb"
+            android:label="@string/title_activity_receptionistdb" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistAccount"
+            android:label="@string/title_activity_receptionist_account" >
+        </activity>
     </application>
 
 </manifest>
