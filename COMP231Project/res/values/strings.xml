@@ -51,6 +51,7 @@
 
     <!-- Spinner array for the Day values -->
     <string-array name="spinnerDay">
+        <item>Select Day</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
@@ -61,5 +62,11 @@
     </string-array>
 
     <string name="title_activity_receptionist_view_all_patients">ReceptionistViewAllPatients</string>
+    <string name="title_activity_receptionistdb">Receptionistdb</string>
+    <string name="title_activity_receptionist_account">ReceptionistAccount</string>
+    <string name="title_activity_doctormain">Doctormain</string>
+    <string name="title_activity_add_lab">AddLab</string>
+    <string name="title_activity_lab">Lab</string>
+    <string name="title_activity_patientmain">Patientmain</string>
 
 </resources>

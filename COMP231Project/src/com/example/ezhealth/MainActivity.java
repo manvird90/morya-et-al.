@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 			Intent i = null;
 			switch (TYPEOFUSER.valueOf(userType)){
 			case Patient:
-				i = new Intent(this, HospitalAdmin.class);
+				i = new Intent(this, Patientmain.class);
 				break;
 			case HospitalAdmin:
 				i = new Intent(this, HospitalAdmin.class);
@@ -138,10 +138,10 @@ public class MainActivity extends Activity {
 				i = new Intent(this, HospitalAdmin.class);
 				break;
 			case LabStaff:
-				i = new Intent(this, HospitalAdmin.class);
+				i = new Intent(this, Lab.class);
 				break;
 			case Doctor:
-				i = new Intent(this, HospitalAdmin.class);
+				i = new Intent(this, Doctormain.class);
 				break;
 			case Pharmacist:
 				i = new Intent(this, HospitalAdmin.class);
