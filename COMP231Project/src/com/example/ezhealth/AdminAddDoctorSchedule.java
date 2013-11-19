@@ -18,11 +18,11 @@ public class AdminAddDoctorSchedule extends Activity {
 	
 	private TextView profileTitle, displayName, displayContact, displayDepartment, tvCurrentTime;
 	private int departmentId;
-	private Spinner spnDay;
 	private TimePicker tpDutyStart, tpDutyEnd;
 	private String day; 
 	private int startHour, startMinute, endHour, endMinute;
 	private Button btnAddSchedule, btnDone;
+	private String currentDay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,12 @@ public class AdminAddDoctorSchedule extends Activity {
 		profileTitle = (TextView) findViewById(R.id.doctorProfileTitle);
 		displayName = (TextView) findViewById(R.id.displayName);
 		displayContact = (TextView) findViewById(R.id.displayContact);
-		spnDay = (Spinner) findViewById(R.id.spnDay);
+		final Spinner spnDay = (Spinner) findViewById(R.id.spnDay);
 		tpDutyStart = (TimePicker) findViewById(R.id.tpDutyStart);
 		tpDutyEnd = (TimePicker) findViewById(R.id.tpDutyEnd);
 		btnAddSchedule = (Button) findViewById(R.id.btnAddSchedule);
 		btnDone = (Button) findViewById(R.id.btnDone);
-		final TextView day = (TextView) spnDay.getSelectedView();
+		
 		
 		
 		profileTitle.setText("Doctor Profile ID: "+doctor.getDoctorId());
@@ -57,22 +57,22 @@ public class AdminAddDoctorSchedule extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
-				if(day.getText().toString()=="Select Day"){
-					
+				TextView day = (TextView) spnDay.getSelectedView();
+				if(!day.getText().toString().equals("Select Day")){
 					DoctorSchedule ds = new DoctorSchedule();
-					ds.setDoctorId(doctor.getDepartmentId());
+					ds.setDoctorId(doctor.getDoctorId());
 					ds.setDay(day.getText().toString());
 					ds.setDutyStartTime(tpDutyStart.getCurrentHour()+":"+tpDutyStart.getCurrentMinute());
 					ds.setDutyEndTime(tpDutyEnd.getCurrentHour()+":"+tpDutyEnd.getCurrentMinute());
 					db.addDoctorSchedule(ds);
 					setCurrentTimeOnView();
-					spnDay.setId(0);
+					Toast.makeText(getBaseContext(), "Schedule of doctor id "+ds.getDoctorId()+" is added for "+ ds.getDay()+
+							"start from "+ ds.getDutyStartTime()+ " to "+ds.getDutyEndTime(), Toast.LENGTH_LONG).show();
+					spnDay.setSelection(0);
+					setCurrentTimeOnView();
 				} else {
 					Toast.makeText(getBaseContext(), "Day selection is required!", Toast.LENGTH_LONG).show();
 				}
-				
-				
 			}
 		});
 		
@@ -80,7 +80,7 @@ public class AdminAddDoctorSchedule extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getBaseContext(), Receptionist.class);
+				Intent intent = new Intent(getBaseContext(), HospitalAdmin.class);
 				startActivity(intent);
 			}
 		});

@@ -52,7 +52,7 @@ public class ReceptionistPatientSearch extends Activity {
 					Toast.makeText(getBaseContext(), "Correct patient id is required !", Toast.LENGTH_SHORT).show();
 				}
 				
-				if (patient.getPatientId() != 0){
+				if (patient != null){
 					
 					Intent intent = new Intent(getBaseContext(), ReceptionistPatientProfileView.class);
 					Bundle bundle = new Bundle();
