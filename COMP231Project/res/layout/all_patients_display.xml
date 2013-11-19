@@ -3,36 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    >
- <LinearLayout 
-        android:id="@+id/row"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-       >
 
     <TextView
         android:id="@+id/tvPatientId"
-        android:layout_width="0dp"
-        android:layout_weight=".20"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="PatientId"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/tvFirstName"
-         android:layout_width="0dp"
-        android:layout_weight=".40"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/tvPatientId"
         android:text="FirstName"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/tvLastName"
-        android:layout_width="0dp"
-        android:layout_weight=".40"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tvFirstName"
         android:text="LastName"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
 
 </RelativeLayout>

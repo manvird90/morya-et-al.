@@ -96,12 +96,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String COL_EXP = "Experience";
     private static final String COL_SPECIALITY = "Speciality";
     private static final String COL_DOC_DEPARTMENTID = "DepartmentId";
-    
-    //Receptionist Registration by Manvir Kaur
-    private static final String TABLE_RECEPTIONISTREGISTRATION = "ReceptionistRegistration";
-    private static final String COL_RECEPTIONISTID = "ReceptionistId";//PrimaryKey
-    private static final String COL_RECEPTIONISTLOGINID = "ReceptionistLoginId";//Foreign Key
 
+    
     //ADMIN REGISTARION BY SACHIN PATEL
     
     //Admin Registration Table
@@ -249,25 +245,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
         db.execSQL(CREATE_DOCTOR_SCHEDULE_TABLE);
         
-        String CREATE_RECEPTIONIST_REGISTRATION_TABLE = "CREATE TABLE " + TABLE_RECEPTIONISTREGISTRATION + "("
-                + COL_RECEPTIONISTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
-                + COL_RECEPTIONISTLOGINID + " INTEGER NOT NULL UNIQUE, "
-        		+ COL_FIRSTNAME + " TEXT NOT NULL, "
-                + COL_LASTNAME + " TEXT NOT NULL, "
-                + COL_GENDER + " TEXT NOT NULL, "
-                + COL_DOB + " TEXT NOT NULL, "//make it not null
-                + COL_EMAIL + " TEXT NOT NULL, "
-                + COL_PHONE + " TEXT NOT NULL, "
-                + COL_APARTMENT + " TEXT NOT NULL, "
-                + COL_STREET + " TEXT NOT NULL, "
-                + COL_CITY + " TEXT NOT NULL, "
-                + COL_PROVINCE + " TEXT NOT NULL, "
-                + COL_COUNTRY + " TEXT NOT NULL, "
-                + COL_POSTALCODE + " TEXT NOT NULL, "
-                + "FOREIGN KEY ("+COL_RECEPTIONISTLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
-
-        db.execSQL(CREATE_RECEPTIONIST_REGISTRATION_TABLE);
-        
         
         
         
@@ -287,7 +264,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENTREG);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VITALINFO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOCTORREGISTRATION);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECEPTIONISTREGISTRATION);
         // Create tables again
         onCreate(db);
 
@@ -567,52 +543,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	return id;
     	
     }
-    //Add Receptionist Manvir
-    public int addReceptionist(Receptionistdb rt) {
-        SQLiteDatabase db = this.getWritableDatabase();
-     
-        ContentValues values = new ContentValues();
-        values.put(COL_RECEPTIONISTLOGINID, rt.getReceptionistLoginId()); 
-        values.put(COL_FIRSTNAME, rt.getFirstName()); 
-        values.put(COL_LASTNAME, rt.getLastName()); 
-        values.put(COL_GENDER, rt.getGender()); 
-        values.put(COL_DOB, rt.getDateOfBirth()); 
-        values.put(COL_EMAIL, rt.getEmail());
-        values.put(COL_PHONE, rt.getPhone()); 
-        values.put(COL_APARTMENT, rt.getApartment());
-        values.put(COL_STREET, rt.getStreet());
-        values.put(COL_CITY, rt.getStreet());
-        values.put(COL_PROVINCE, rt.getProvince());
-        values.put(COL_COUNTRY, rt.getCountry());
-        values.put(COL_POSTALCODE, rt.getPostalCode());
-     
-        // Inserting Row
-        db.insert(TABLE_RECEPTIONISTREGISTRATION, null, values);
-        db.close(); // Closing database connection
-        
-        int rid;
-        SQLiteDatabase dbr = this.getReadableDatabase();
-        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_RECEPTIONISTREGISTRATION, null);
-        cursor.moveToLast();
-        rid = cursor.getInt(0);
-        cursor.close();
-        dbr.close();
-        return rid;
-    }
     
-    public int getReceptionistId(String firstName, String lastName, int ReceptionistLoginId){
-    	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_RECEPTIONISTREGISTRATION+" where "+COL_RECEPTIONISTLOGINID+" = "+
-        							ReceptionistLoginId+" and "+COL_FIRSTNAME+" = \""+
-        							firstName+"\" and "+COL_LASTNAME+" = \""+
-        							lastName+"\"", null);
-        cursor.moveToFirst();
-    	int id =  cursor.getInt(0);
-    	cursor.close();
-    	db.close();
-    	return id;
-    	
-    }
     
     //method to get patient by jignesh patel - return patient class
     public Patient getPatient(int patientId, String firstName, String lastName){

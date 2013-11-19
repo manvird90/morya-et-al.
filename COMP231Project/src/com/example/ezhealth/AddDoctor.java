@@ -3,9 +3,9 @@ package com.example.ezhealth;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -113,8 +113,6 @@ public class AddDoctor extends Activity {
 				
 				db.close();
 				Toast.makeText(getBaseContext(),"Doctor id is " + displayDoctorId, Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(getBaseContext(), HospitalAdmin.class);
-				startActivity(intent);
 				} else {
 
 					Toast.makeText(getBaseContext(),"Not able to register doctor", Toast.LENGTH_SHORT).show();

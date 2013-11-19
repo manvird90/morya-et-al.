@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -122,8 +121,6 @@ public class PatientRegistration extends Activity {
 				db.addVitalInfo(pv);
 				db.close();
 				Toast.makeText(getBaseContext(),"Patient id is "+ displayPatientId, Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(getBaseContext(), Receptionist.class);
-				startActivity(intent);
 				} else {
 
 					Toast.makeText(getBaseContext(),"Not able to register patient", Toast.LENGTH_SHORT).show();
