@@ -113,10 +113,6 @@
             android:name="com.example.ezhealth.AdminRegistration"
             android:label="@string/title_activity_admin_registration" >
         </activity>
-        <activity
-            android:name="com.example.ezhealth.ReceptionistAccount"
-            android:label="@string/title_activity_receptionist_account" >
-        </activity>
     </application>
 
 </manifest>

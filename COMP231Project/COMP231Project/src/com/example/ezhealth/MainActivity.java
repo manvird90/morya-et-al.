@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
 				i = new Intent(this, HospitalAdmin.class);
 				break;
 			case Receptionist:
-				i = new Intent(this, ReceptionistMain.class);
+				i = new Intent(this, Receptionist.class);
 				break;
 			case Nurse:
 				i = new Intent(this, HospitalAdmin.class);
