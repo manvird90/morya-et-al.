@@ -62,5 +62,7 @@
     </string-array>
 
     <string name="title_activity_receptionist_view_all_patients">ReceptionistViewAllPatients</string>
+    <string name="title_activity_receptionist_account">ReceptionistAccount</string>
+    <string name="title_activity_receptionistdb">Receptionistdb</string>
 
 </resources>
