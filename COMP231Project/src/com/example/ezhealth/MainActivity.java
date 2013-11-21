@@ -126,13 +126,7 @@ public class MainActivity extends Activity {
 			Intent i = null;
 			switch (TYPEOFUSER.valueOf(userType)){
 			case Patient:
-				i = new Intent(this, PatientHomepage.class);
-				int k = db.getPatientLoginId(userType,userName,md5(userPassword));
-				if(k!=0){
-					i.putExtra("patientLoginId", k);
-				} else {
-					Toast.makeText(this, "Not such patient found", Toast.LENGTH_LONG).show();
-				}
+				i = new Intent(this, HospitalAdmin.class);
 				break;
 			case HospitalAdmin:
 				i = new Intent(this, HospitalAdmin.class);

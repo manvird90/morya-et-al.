@@ -1,62 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ReceptionistPatientProfileView" >
-    
-    <TextView
-        android:id = "@+id/lblDocName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/LabelForProfileAttribute"
-        android:layout_marginTop="10dp"
-        android:text="Name" />
-    <TextView
-        android:id = "@+id/displayDocName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-    
-        <TextView
-        android:id = "@+id/lblDocContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        style = "@style/LabelForProfileAttribute"
-        android:text="Contact Information" />
-    <TextView
-        android:id = "@+id/displayDocContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-    <TextView
-        android:id = "@+id/displayDocAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
+    tools:context=".ReceptionistDoctorProfileView" >
 
     <TextView
-        android:id="@+id/lblDocSpecification"
-        style="@style/LabelForProfileAttribute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Specification" />
+        android:text="@string/hello_world" />
 
-    <TextView
-        android:id = "@+id/displayDocInsuranceInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-   
-</LinearLayout>
+</RelativeLayout>
