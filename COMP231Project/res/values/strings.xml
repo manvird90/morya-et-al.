@@ -64,5 +64,7 @@
     <string name="title_activity_receptionist_view_all_patients">ReceptionistViewAllPatients</string>
     <string name="title_activity_receptionist_account">ReceptionistAccount</string>
     <string name="title_activity_receptionistdb">Receptionistdb</string>
+    <string name="title_activity_receptionist_view_all_doctor">ReceptionistViewAllDoctor</string>
+    <string name="title_activity_patient_homepage">PatientHomepage</string>
 
 </resources>

@@ -14,55 +14,62 @@
         android:id = "@+id/patientProfileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/WelcomeLineOnEachPage"
-        android:text="Profile" />
+        style="@style/WelcomeLineOnEachPage" />
     
     <TextView
         android:id = "@+id/lblName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="--Name------------" />
+        style = "@style/LabelForProfileAttribute"
+        android:layout_marginTop="10dp"
+        android:text="Name" />
     <TextView
         android:id = "@+id/displayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:textSize="14sp" />
     
         <TextView
         android:id = "@+id/lblContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="--Contact Info---------" />
+        android:layout_marginTop="10dp"
+        style = "@style/LabelForProfileAttribute"
+        android:text="Contact Information" />
     <TextView
         android:id = "@+id/displayContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:textSize="14sp" />
     
         <TextView
         android:id = "@+id/lblAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="--Address---------" />
+        android:layout_marginTop="10dp"
+        style = "@style/LabelForProfileAttribute"
+        android:text="Address" />
     <TextView
         android:id = "@+id/displayAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:textSize="14sp" />
     
         <TextView
         android:id = "@+id/lblInsuranceInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="--Insurance Policy Information--" />
+        android:layout_marginTop="10dp"
+        style = "@style/LabelForProfileAttribute"
+        android:text="Insurance Policy Information" />
     <TextView
         android:id = "@+id/displayInsuranceInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:textSize="14sp" />
    
 </LinearLayout>

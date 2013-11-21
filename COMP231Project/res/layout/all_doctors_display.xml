@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+ <LinearLayout 
+        android:id="@+id/row"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       >
+
+    <TextView
+        android:id="@+id/tvDoctorId"
+        android:layout_width="0dp"
+        android:layout_weight=".20"
+        android:layout_height="wrap_content"
+        android:text="Id"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvFirstName"
+         android:layout_width="0dp"
+        android:layout_weight=".40"
+        android:layout_height="wrap_content"
+        android:text="FirstName"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvLastName"
+        android:layout_width="0dp"
+        android:layout_weight=".40"
+        android:layout_height="wrap_content"
+        android:text="LastName"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+
+</RelativeLayout>
+

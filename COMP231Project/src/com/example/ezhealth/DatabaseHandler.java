@@ -674,6 +674,38 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	return listPatients;
     }
     
+//get all doctors in arraylist by sachin patel
+    
+    public ArrayList<Doctor> getAllDoctors(){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR, null);
+        ArrayList<Doctor> listDoctors = new ArrayList<Doctor>();
+        while(cursor.moveToNext()){
+        Doctor doctor = new Doctor();
+        doctor.setDoctorId(cursor.getInt(0));
+        doctor.setDoctorLoginId(cursor.getInt(1));
+        doctor.setFirstName(cursor.getString(2));
+        doctor.setLastName(cursor.getString(3));
+        doctor.setGender(cursor.getString(4));
+        doctor.setDateOfBirth(cursor.getString(5));
+        doctor.setEmail(cursor.getString(6));
+        doctor.setPhone(cursor.getString(7));
+        doctor.setApartment(cursor.getString(8));
+        doctor.setStreet(cursor.getString(9));
+        doctor.setCity(cursor.getString(10));
+        doctor.setProvince(cursor.getString(11));
+        doctor.setCountry(cursor.getString(12));
+        doctor.setPostalCode(cursor.getString(13));
+        doctor.setExp(cursor.getString(14));
+        doctor.setSpeciality(cursor.getString(15));
+       	doctor.setDepartmentId(cursor.getInt(16));
+        listDoctors.add(doctor);
+        }
+        cursor.close();
+    	db.close();
+    	return listDoctors;
+    }
+    
     public Doctor getDoctor(int doctorId, String firstName, String lastName){
     	SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR+" where "+COL_DOCTORID+" = "+
@@ -758,5 +790,55 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	return id;
     	
     }
+    //sachin patel getpatient login Id//
 
+    public int getPatientLoginId(String ut, String un, String up) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_USERLOGIN+" where "+COL_USERTYPE+" = \""+
+        							ut+"\" and "+COL_USERNAME+" = \""+
+        							un+"\" and "+COL_USERPASSWORD+" = \""+
+        							up+"\"", null);
+    
+        if(cursor.moveToFirst()){
+    	int i = cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return i;
+         } else {
+        	 int i =0;
+        	 cursor.close();
+        	 db.close();
+        	 return i;
+         }
+      
+    }
+    
+    public Patient getPatientByLoginId(int patientLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENT+" where "+COL_PATIENTLOGINID+" = "+
+        							patientLoginId, null);
+        cursor.moveToFirst();
+        Patient patient = new Patient();
+        patient.setPatientId(cursor.getInt(0));
+        patient.setPatientLoginId(cursor.getInt(1));
+        patient.setFirstName(cursor.getString(2));
+        patient.setLastName(cursor.getString(3));
+        patient.setGender(cursor.getString(4));
+        patient.setDateOfBirth(cursor.getString(5));
+        patient.setEmail(cursor.getString(6));
+        patient.setPhone(cursor.getString(7));
+        patient.setApartment(cursor.getString(8));
+        patient.setStreet(cursor.getString(9));
+        patient.setCity(cursor.getString(10));
+        patient.setProvince(cursor.getString(11));
+        patient.setCountry(cursor.getString(12));
+        patient.setPostalCode(cursor.getString(13));
+        patient.setHealthPolicyNumber(cursor.getString(14));
+        patient.setInsuranceCompany(cursor.getString(15));
+    	cursor.close();
+    	db.close();
+    	return patient;
+    	
+    }
+    
 }
