@@ -50,7 +50,7 @@ public class AdminDoctorSearchToAddSchedule extends Activity {
 				} else {
 					Toast.makeText(getBaseContext(), "Correct doctor id is required !", Toast.LENGTH_SHORT).show();
 				}
-				if (doctor!= null){
+				if (doctor.getDoctorId() != 0){
 					
 					Intent intent = new Intent(getBaseContext(), AdminAddDoctorSchedule.class);
 					Bundle bundle = new Bundle();
@@ -58,7 +58,6 @@ public class AdminDoctorSearchToAddSchedule extends Activity {
 					intent.putExtras(bundle);
 					startActivity(intent);
 				} else {
-					
 					Toast.makeText(getBaseContext(), "No doctor found having such information!", Toast.LENGTH_SHORT).show();
 				}
 			}

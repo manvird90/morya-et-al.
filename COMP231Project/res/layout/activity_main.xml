@@ -6,8 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainAcitivity" >
-<!-- 
+    tools:context=".LoginMainAcitivity" >
+
     <TextView
         android:id="@+id/txtWelcomeMessage"
         android:layout_width="fill_parent"
@@ -27,15 +27,6 @@
         android:layout_marginTop="10dp"
         style="@style/WelcomeLineOnEachPage"
         android:text="@string/txtTagLine"  />
-        
-  -->
-      <ImageView
-        android:id="@+id/imageEzHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/main_page_image" />
    
     <!-- Table -->
  	<TableLayout 
@@ -44,7 +35,7 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="20dp"
-    android:layout_below="@+id/imageEzHealth" >
+    android:layout_below="@+id/txtTagLine" >
  
     <!-- First USer Row -->
     <TableRow
@@ -106,13 +97,9 @@
         android:id="@+id/btnLogin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/tblLogin"
         android:layout_centerHorizontal="true"
-        android:background="#000043"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
         android:text="@string/btnLogin" />
-
-
 
 </RelativeLayout>

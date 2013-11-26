@@ -6,11 +6,94 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ReceptionistDoctorSearch" >
+    tools:context=".ReceptionistPatientSearch" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtDoctorSearchWelcomeMessage"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        style="@style/WelcomeLineOnEachPage"
+        android:text="Search Doctor information by providing following information." />
+
+
+   
+    <!-- Table -->
+ 	<TableLayout 
+    android:id="@+id/tblSearchDoctor"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+    android:layout_below="@+id/txtDoctorSearchWelcomeMessage" >
+ 
+    <!-- First USer Row -->
+    
+      
+    <TableRow
+        android:id="@+id/trDoctorId"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+ 
+    		<TextView
+            android:id="@+id/lblDoctorId"
+            android:text="Doctor Id" />
+    		
+    		<EditText
+	        android:id="@+id/etDoctorId"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:inputType="number" />
+       		
+    </TableRow>
+    
+    		 <!-- Second Row Password -->
+    <TableRow
+        android:id="@+id/trDocFirstName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+ 
+    		<TextView
+            android:id="@+id/lblDocFirstName"
+            android:text="First Name" />
+    		
+    		<EditText
+	        android:id="@+id/etDocFirstName"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:inputType="text" />
+       		
+    </TableRow>
+    
+    <!-- Third Row Password -->
+    <TableRow
+        android:id="@+id/trDocLastName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+ 
+    		<TextView
+            android:id="@+id/lblDocLastName"
+            android:text="Last Name" />
+    		
+    		<EditText
+	        android:id="@+id/etDocLastName"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:inputType="text" />
+       		
+    </TableRow>
+ </TableLayout>
+    
+  
+    <Button
+        android:id="@+id/btnSearchDoctor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tblSearchDoctor"
+        android:layout_centerHorizontal="true"
+        android:text="Search Doctor" />
 
 </RelativeLayout>

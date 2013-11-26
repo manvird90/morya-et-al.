@@ -129,26 +129,6 @@
             android:name="com.example.ezhealth.ReceptionistViewAllPatients"
             android:label="@string/title_activity_receptionist_view_all_patients" >
         </activity>
-        <activity
-            android:name="com.example.ezhealth.ReceptionistAccount"
-            android:label="@string/title_activity_receptionist_account" >
-        </activity>
-        <activity
-            android:name="com.example.ezhealth.Receptionistdb"
-            android:label="@string/title_activity_receptionistdb" >
-        </activity>
-        <activity
-            android:name="com.example.ezhealth.AddLab"
-            android:label="@string/title_activity_add_lab" >
-        </activity>
-        <activity
-            android:name="com.example.ezhealth.LabAccount"
-            android:label="@string/title_activity_lab_account" >
-        </activity>
-        <activity
-            android:name="com.example.ezhealth.Lab"
-            android:label="@string/title_activity_lab" >
-        </activity>
     </application>
 
 </manifest>

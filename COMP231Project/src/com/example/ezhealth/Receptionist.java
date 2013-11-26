@@ -53,6 +53,16 @@ public class Receptionist extends Activity {
 				startActivity(i);
 			}
 		});
+		
+//		btnAllDoctors = (Button) findViewById(R.id.btnAllDoctors);
+//		btnAllDoctors.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent i = new Intent(getBaseContext(), ReceptionistViewAllPatients.class);
+//				startActivity(i);
+//			}
+//		});
 	}
 
 	@Override

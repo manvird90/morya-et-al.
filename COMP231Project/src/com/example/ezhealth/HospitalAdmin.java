@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 public class HospitalAdmin extends Activity {
 
-	String[] registerStaff = new String[] {"Register a Doctor", "Register a Receptionist", "Register LabStaff", "Register a Pharmacist","Add Doctor Schedule"};
+	String[] registerStaff = new String[] {"Register a Doctor", "Register a Receptionist", "Register a Nurse", "Register a Pharmacist", "Add Doctor Schedule"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,10 @@ public class HospitalAdmin extends Activity {
 						 intent = new Intent(view.getContext(), DoctorAccount.class);
 						 break;
 					 case 1:
-						 intent = new Intent(view.getContext(), ReceptionistAccount.class);
+						 intent = new Intent(view.getContext(), AddReceptionist.class);
 						 break;
 					 case 2:
-						 intent = new Intent(view.getContext(), LabAccount.class);
+						 intent = new Intent(view.getContext(), Addnurse.class);
 						 break;
 					 case 3:
 						 intent = new Intent(view.getContext(), AddPharmacist.class);

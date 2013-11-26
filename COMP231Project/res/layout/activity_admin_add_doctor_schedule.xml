@@ -1,18 +1,14 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminAddDoctorSchedule">
-
-
-<LinearLayout 
-    android:id="@+id/LinearLayout"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-     >
-
-
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AdminAddDoctorSchedule" >
 
     <TextView
         android:id = "@+id/doctorProfileTitle"
@@ -62,7 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:textSize="14sp" />
-
     	
      <TextView
         android:id = "@+id/lblDay"
@@ -72,11 +67,12 @@
         style = "@style/LabelForProfileAttribute"
         android:text="Day" />
      <!-- Day spinner -->
-       <Spinner
-        android:id="@+id/spnDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/spinnerDay" />
+
+     <Spinner
+         android:id="@+id/spnDay"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:entries="@array/spinnerDay" />
     
      <TextView
         android:id = "@+id/lblDutyStart"
@@ -88,10 +84,11 @@
      
      <!-- TimePicker -->
 
-    	<TimePicker
-    	    android:id="@+id/tpDutyStart"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content" />
+     <TimePicker
+         android:id="@+id/tpDutyStart"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
 
      <TextView
         android:id = "@+id/lblDutyEnd"
@@ -101,8 +98,6 @@
         style = "@style/LabelForProfileAttribute"
         android:text="Duty End Time" />
      <!-- TimePicker -->
-
-
       <TimePicker
          android:id="@+id/tpDutyEnd"
          android:layout_width="wrap_content"
@@ -110,18 +105,4 @@
      <!-- Add other time button -->
      <!-- Save schedule -->
      
-     
-     <Button
-         android:id="@+id/btnAddSchedule"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:text="Add Schedule" />
-     
-          <Button
-         android:id="@+id/btnDone"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:text="Done" />
-     
 </LinearLayout>
-</ScrollView>
