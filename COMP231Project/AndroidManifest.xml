@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="16"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -128,6 +128,38 @@
         <activity
             android:name="com.example.ezhealth.ReceptionistViewAllPatients"
             android:label="@string/title_activity_receptionist_view_all_patients" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistAccount"
+            android:label="@string/title_activity_receptionist_account" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.Receptionistdb"
+            android:label="@string/title_activity_receptionistdb" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.ReceptionistViewAllDoctor"
+            android:label="@string/title_activity_receptionist_view_all_doctor" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.PatientHomepage"
+            android:label="@string/title_activity_patient_homepage" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.LabAccount"
+            android:label="@string/title_activity_lab_account" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AddLab"
+            android:label="@string/title_activity_add_lab" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.DoctorHomePage"
+            android:label="@string/title_activity_doctor_home_page" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.CalView"
+            android:label="@string/title_activity_cal_view" >
         </activity>
     </application>
 

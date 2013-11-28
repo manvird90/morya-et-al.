@@ -82,6 +82,17 @@
         android:paddingLeft="25sp"
         android:paddingRight="25sp"
         android:drawablePadding="-15sp"/>
+        <Button
+        android:id="@+id/btnScheduleAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/btn_receptionist_schedule_patient_appointment"
+        android:textColor="#FFFFFF"
+        android:paddingTop="25sp"
+        android:paddingLeft="25sp"
+        android:paddingRight="25sp"
+        android:drawablePadding="-15sp"/>
         
         </TableRow>
 

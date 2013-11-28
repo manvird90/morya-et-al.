@@ -31,37 +31,45 @@ public class ReceptionistPatientSearch extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				patientId = Integer.parseInt(etPatientId.getText().toString());
-				firstName = etFirstName.getText().toString();
-				lastName = etLastName.getText().toString();
-				
 				//Patient instance
-				Patient patient = new Patient();
+				Patient patient = null;
 				//checking all three inputs do have values
-				if (patientId!=0){
-					if (firstName != ""){
-						if(lastName != ""){
-							patient = db.getPatient(patientId, firstName, lastName);
+				
+				if(!etPatientId.getText().toString().trim().equals("")){
+					try{
+						patientId = Integer.parseInt(etPatientId.getText().toString());
+						if (!etFirstName.getText().toString().trim().equals("")){
+							firstName = etFirstName.getText().toString();
+							if(!etLastName.getText().toString().trim().equals("")){
+								lastName = etLastName.getText().toString();
+							
+								patient = db.getPatient(patientId, firstName, lastName);
+								
+								if (patient != null){
+									Intent intent = new Intent(getBaseContext(), ReceptionistPatientProfileView.class);
+									Bundle bundle = new Bundle();
+									bundle.putSerializable("patient", patient);
+									intent.putExtras(bundle);
+									startActivity(intent);
+								} else {
+									Toast.makeText(getBaseContext(), "No patient found having such information!", Toast.LENGTH_SHORT).show();
+								}
+																
+								
+							} else {
+								Toast.makeText(getBaseContext(), "Last name is required !", Toast.LENGTH_SHORT).show();
+							}
 						} else {
-							Toast.makeText(getBaseContext(), "Last name is required !", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getBaseContext(), "First name is required !", Toast.LENGTH_SHORT).show();
 						}
-					} else {
-						Toast.makeText(getBaseContext(), "First name is required !", Toast.LENGTH_SHORT).show();
+					}catch (NumberFormatException e){
+						Toast.makeText(getBaseContext(), "Enter correct patient ID!", Toast.LENGTH_SHORT).show();
 					}
 				} else {
-					Toast.makeText(getBaseContext(), "Correct patient id is required !", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(), "Patient ID is required!", Toast.LENGTH_SHORT).show();
 				}
-				
-				if (patient.getPatientId() != 0){
-					
-					Intent intent = new Intent(getBaseContext(), ReceptionistPatientProfileView.class);
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("patient", patient);
-					intent.putExtras(bundle);
-					startActivity(intent);
-				} else {
-					Toast.makeText(getBaseContext(), "No patient id found having such information!", Toast.LENGTH_SHORT).show();
-				}
+			 
+			
 				
 			}
 		});

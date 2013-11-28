@@ -1,6 +1,9 @@
 package com.example.ezhealth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.w3c.dom.Element;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +11,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper{
 	
@@ -27,7 +31,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String COL_USERTYPE = "userType";
     
     //Patient Registration Table by Jignesh Patel
-    private static final String TABLE_PATIENTREG = "PatientReg";
+    private static final String TABLE_PATIENT = "Patient";
     private static final String COL_PATIENTID = "PatientId";//PrimaryKey
     private static final String COL_PATIENTLOGINID = "PatientLoginId";//Foreign Key
     private static final String COL_FIRSTNAME = "FirstName";
@@ -90,18 +94,22 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
   //Doctor Registration by Manvir Kaur
 
-    private static final String TABLE_DOCTORREGISTRATION = "DoctorRegistration";
+    private static final String TABLE_DOCTOR = "DoctorRegistration";
     private static final String COL_DOCTORID = "DoctorId";//PrimaryKey
     private static final String COL_DOCTORLOGINID = "DoctorLoginId";//Foreign Key
     private static final String COL_EXP = "Experience";
     private static final String COL_SPECIALITY = "Speciality";
     private static final String COL_DOC_DEPARTMENTID = "DepartmentId";
 
+    //Receptionist Registration by Manvir Kaur
+    private static final String TABLE_RECEPTIONISTREGISTRATION = "ReceptionistRegistration";
+    private static final String COL_RECEPTIONISTID = "ReceptionistId";//PrimaryKey
+    private static final String COL_RECEPTIONISTLOGINID = "ReceptionistLoginId";//Foreign Key
     
     //ADMIN REGISTARION BY SACHIN PATEL
     
     //Admin Registration Table
-    private static final String TABLE_ADMINREG = "AdminReg";
+    private static final String TABLE_ADMIN = "AdminReg";
     private static final String COL_ADMINID = "AdminId";//PrimaryKey
     private static final String COL_ADMINLOGINID = "AdminLoginId";//Foreign Key
     private static final String COL_ADMINFIRSTNAME = "FirstName";
@@ -116,6 +124,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String COL_ADMINPROVINCE = "Province";
     private static final String COL_ADMINCOUNTRY = "Country";
     private static final String COL_ADMINPOSTALCODE = "PostalCode";
+    
+    //Lab registration by Manvir
+    
+    private static final String TABLE_LABREGISTRATION = "LabRegistration";
+    private static final String COL_LABID = "LabId";//PrimaryKey
+    private static final String COL_LABLOGINID = "LabLoginId";//Foreign Key
     
     
     public DatabaseHandler(Context context) {
@@ -155,7 +169,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         //Patient registration and vital info table by jignesh patel
         
         //TOTAL 16 COLUMNS
-        String CREATE_PATIENTREG_TABLE = "CREATE TABLE " + TABLE_PATIENTREG + "("
+        String CREATE_PATIENTREG_TABLE = "CREATE TABLE " + TABLE_PATIENT + "("
                 + COL_PATIENTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_PATIENTLOGINID + " INTEGER NOT NULL UNIQUE, " // FOREIGN KEY
         		+ COL_FIRSTNAME + " TEXT NOT NULL, "
@@ -184,13 +198,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 + COL_ALLERGY + " TEXT NOT NULL, "
                 + COL_CHRONICDISEASE + " TEXT NOT NULL, "
                 + COL_DISEASEHISTORY + " TEXT NOT NULL, "
-                + "FOREIGN KEY ("+COL_VITALPATIENTID+") REFERENCES "+TABLE_PATIENTREG+"("+COL_PATIENTID+"))";
+                + "FOREIGN KEY ("+COL_VITALPATIENTID+") REFERENCES "+TABLE_PATIENT+"("+COL_PATIENTID+"))";
         
         db.execSQL(CREATE_VITALINFO_TABLE);
         
         //ADMIN TABLE by sachin patel
         
-        String CREATE_ADMINREG_TABLE = "CREATE TABLE " + TABLE_ADMINREG + "("
+        String CREATE_ADMINREG_TABLE = "CREATE TABLE " + TABLE_ADMIN + "("
                 + COL_ADMINID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_ADMINLOGINID + " INTEGER NOT NULL UNIQUE, " // FOREIGN KEY
         		+ COL_ADMINFIRSTNAME + " TEXT NOT NULL, "
@@ -210,7 +224,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.execSQL(CREATE_ADMINREG_TABLE);
         
 //      Doctor table by manvir  kaur - 17 columns -  modified by jignesh patel department 
-        String CREATE_DOCTOR_REGISTRATION_TABLE = "CREATE TABLE " + TABLE_DOCTORREGISTRATION + "("
+        String CREATE_DOCTOR_REGISTRATION_TABLE = "CREATE TABLE " + TABLE_DOCTOR + "("
                 + COL_DOCTORID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_DOCTORLOGINID + " INTEGER NOT NULL UNIQUE, "
         		+ COL_FIRSTNAME + " TEXT NOT NULL, "
@@ -227,7 +241,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 + COL_POSTALCODE + " TEXT NOT NULL, "
                 + COL_EXP + " TEXT NOT NULL, "
                + COL_SPECIALITY + " TEXT NOT NULL, "
-               + COL_DOC_DEPARTMENTID + " INTEGER NOT NULL UNIQUE, "
+               + COL_DOC_DEPARTMENTID + " INTEGER NOT NULL, "
                 + "FOREIGN KEY ("+COL_DOC_DEPARTMENTID+") REFERENCES "+TABLE_DEPARTMENT+"("+COL_DEPARTMENTID+"), "
                + "FOREIGN KEY ("+COL_DOCTORLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
 
@@ -241,11 +255,77 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         		+ COL_DAY + " TEXT NOT NULL, "
                 + COL_DUTYSTART + " TEXT NOT NULL, "
                 + COL_DUTYEND + " TEXT NOT NULL, "
-               + "FOREIGN KEY ("+COL_SCH_DOCTORID+") REFERENCES "+TABLE_DOCTORREGISTRATION+"("+COL_DOCTORID+"))";
+               + "FOREIGN KEY ("+COL_SCH_DOCTORID+") REFERENCES "+TABLE_DOCTOR+"("+COL_DOCTORID+"))";
 
         db.execSQL(CREATE_DOCTOR_SCHEDULE_TABLE);
         
         
+        //Appointment table by jignesh patel
+        
+        String CREATE_APPOINTMENT_TABLE = "CREATE TABLE " + TABLE_APPOINTMENT + "("
+                + COL_APPOINTMENTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + COL_APP_PATIENTID + " INTEGER NOT NULL, "
+                + COL_APP_DOCTORID + " INTEGER NOT NULL, "
+                + COL_APP_DEPARTMENTID + " INTEGER NOT NULL, "
+        		+ COL_DATE + " TEXT NOT NULL, "
+                + COL_TIME + " TEXT NOT NULL, "
+                + "FOREIGN KEY ("+COL_APP_PATIENTID+") REFERENCES "+TABLE_PATIENT+"("+COL_PATIENTID+"), "
+                + "FOREIGN KEY ("+COL_APP_DOCTORID+") REFERENCES "+TABLE_DOCTOR+"("+COL_DOCTORID+"), "
+               + "FOREIGN KEY ("+COL_APP_DEPARTMENTID+") REFERENCES "+TABLE_DEPARTMENT+"("+COL_DEPARTMENTID+"))";
+        
+        db.execSQL(CREATE_APPOINTMENT_TABLE);
+        
+        String CREATE_AVAILABILITY_TABLE = "CREATE TABLE " + TABLE_AVAILABILITY + "("
+                + COL_AVAILABILITYID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + COL_AVA_APPOINTMENTID + " INTEGER NOT NULL, "
+        		+ COL_AVA_DATE + " TEXT NOT NULL, "
+                + COL_AVA_TIME + " TEXT NOT NULL, "
+                + COL_ISAVAILABLE + " TEXT NOT NULL, "
+               + "FOREIGN KEY ("+COL_AVA_APPOINTMENTID+") REFERENCES "+TABLE_APPOINTMENT+"("+COL_APPOINTMENTID+"))";
+        
+        db.execSQL(CREATE_AVAILABILITY_TABLE);
+        
+        //REceptionist table -- manvir kaur
+        
+        String CREATE_RECEPTIONIST_REGISTRATION_TABLE = "CREATE TABLE " + TABLE_RECEPTIONISTREGISTRATION + "("
+                + COL_RECEPTIONISTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + COL_RECEPTIONISTLOGINID + " INTEGER NOT NULL UNIQUE, "
+        		+ COL_FIRSTNAME + " TEXT NOT NULL, "
+                + COL_LASTNAME + " TEXT NOT NULL, "
+                + COL_GENDER + " TEXT NOT NULL, "
+                + COL_DOB + " TEXT NOT NULL, "//make it not null
+                + COL_EMAIL + " TEXT NOT NULL, "
+                + COL_PHONE + " TEXT NOT NULL, "
+                + COL_APARTMENT + " TEXT NOT NULL, "
+                + COL_STREET + " TEXT NOT NULL, "
+                + COL_CITY + " TEXT NOT NULL, "
+                + COL_PROVINCE + " TEXT NOT NULL, "
+                + COL_COUNTRY + " TEXT NOT NULL, "
+                + COL_POSTALCODE + " TEXT NOT NULL, "
+                + "FOREIGN KEY ("+COL_RECEPTIONISTLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
+
+        db.execSQL(CREATE_RECEPTIONIST_REGISTRATION_TABLE);
+        
+ //Lab table -- manvir kaur
+        
+        String CREATE_LAB_REGISTRATION_TABLE = "CREATE TABLE " + TABLE_LABREGISTRATION + "("
+                + COL_LABID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + COL_LABLOGINID + " INTEGER NOT NULL UNIQUE, "
+        		+ COL_FIRSTNAME + " TEXT NOT NULL, "
+                + COL_LASTNAME + " TEXT NOT NULL, "
+                + COL_GENDER + " TEXT NOT NULL, "
+                + COL_DOB + " TEXT NOT NULL, "//make it not null
+                + COL_EMAIL + " TEXT NOT NULL, "
+                + COL_PHONE + " TEXT NOT NULL, "
+                + COL_APARTMENT + " TEXT NOT NULL, "
+                + COL_STREET + " TEXT NOT NULL, "
+                + COL_CITY + " TEXT NOT NULL, "
+                + COL_PROVINCE + " TEXT NOT NULL, "
+                + COL_COUNTRY + " TEXT NOT NULL, "
+                + COL_POSTALCODE + " TEXT NOT NULL, "
+                + "FOREIGN KEY ("+COL_RECEPTIONISTLOGINID+") REFERENCES "+TABLE_USERLOGIN+"("+COL_USERLOGINID+"))";
+
+        db.execSQL(CREATE_LAB_REGISTRATION_TABLE);
         
         
     	} catch (SQLException e) {
@@ -261,9 +341,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERLOGIN);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENTREG);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VITALINFO);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOCTORREGISTRATION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOCTOR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_APPOINTMENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DOCTORSCHEDULE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_AVAILABILITY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMIN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEPARTMENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMINKEY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LABREGISTRATION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECEPTIONISTREGISTRATION);
         // Create tables again
         onCreate(db);
 
@@ -341,7 +429,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COL_DAY, ds.getDay());
         values.put(COL_DUTYSTART, ds.getDutyStartTime());
         values.put(COL_DUTYEND, ds.getDutyEndTime());
+        try{
         db.insert(TABLE_DOCTORSCHEDULE, null, values);
+        }catch(SQLException e){
+        }
         db.close();
     }
     //userlogin table jignesh patel
@@ -379,6 +470,24 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	         db.close();
 	        return false;
     }
+    //check unique username for the user by jignesh patel
+    
+    public boolean isUserNameAvailable(String userName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_USERLOGIN+" where "+COL_USERNAME+" = \""+userName+"\"", null);
+       
+	    	 if (cursor.moveToFirst()){
+	        		cursor.close();
+	                 db.close();
+	        		return false;
+	        	 } 	 else {
+	        		 cursor.close();
+	                 db.close();
+	        		 return true;
+	        	 }
+	  
+        
+    }
     
     public int getUserId(String ut, String un, String up){
     	SQLiteDatabase db = this.getReadableDatabase();
@@ -412,12 +521,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COL_INSURANCECOMPANY, pt.getInsuranceCompany()); 
      
         // Inserting Row
-        db.insert(TABLE_PATIENTREG, null, values);
+        db.insert(TABLE_PATIENT, null, values);
         db.close(); // Closing database connection
         
         int pid;
         SQLiteDatabase dbr = this.getReadableDatabase();
-        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_PATIENTREG, null);
+        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_PATIENT, null);
         cursor.moveToLast();
         pid = cursor.getInt(0);
         cursor.close();
@@ -427,7 +536,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
     public int getPatientId(String firstName, String lastName, int patientLoginId){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENTREG+" where "+COL_PATIENTLOGINID+" = "+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENT+" where "+COL_PATIENTLOGINID+" = "+
         							patientLoginId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
@@ -476,13 +585,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COL_POSTALCODE, ad.getPostalCode());
       
         // Inserting Row
-        db.insert(TABLE_ADMINREG, null, values);
+        db.insert(TABLE_ADMIN, null, values);
         db.close(); // Closing database connection
     }
     
     public int getAdminId(String firstName, String lastName, int adminLoginId){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADMINREG+" where "+COL_ADMINLOGINID+" = "+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_ADMIN+" where "+COL_ADMINLOGINID+" = "+
         							adminLoginId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
@@ -517,12 +626,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         values.put(COL_DOC_DEPARTMENTID, dt.getDepartmentId());
      
         // Inserting Row
-        db.insert(TABLE_DOCTORREGISTRATION, null, values);
+        db.insert(TABLE_DOCTOR, null, values);
         db.close(); // Closing database connection
         
         int did;
         SQLiteDatabase dbr = this.getReadableDatabase();
-        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_DOCTORREGISTRATION, null);
+        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_DOCTOR, null);
         cursor.moveToLast();
         did = cursor.getInt(0);
         cursor.close();
@@ -532,7 +641,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
     public int getDoctorId(String firstName, String lastName, int DoctorLoginId){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTORREGISTRATION+" where "+COL_DOCTORLOGINID+" = "+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR+" where "+COL_DOCTORLOGINID+" = "+
         							DoctorLoginId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
@@ -548,12 +657,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     //method to get patient by jignesh patel - return patient class
     public Patient getPatient(int patientId, String firstName, String lastName){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENTREG+" where "+COL_PATIENTID+" = "+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENT+" where "+COL_PATIENTID+" = "+
         							patientId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
-        cursor.moveToFirst();
-        Patient patient = new Patient();
+        Patient patient = null;
+        if(cursor.moveToFirst()) {
+        patient = new Patient();
         patient.setPatientId(cursor.getInt(0));
         patient.setPatientLoginId(cursor.getInt(1));
         patient.setFirstName(cursor.getString(2));
@@ -570,16 +680,24 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         patient.setPostalCode(cursor.getString(13));
         patient.setHealthPolicyNumber(cursor.getString(14));
         patient.setInsuranceCompany(cursor.getString(15));
-    	cursor.close();
+        
+        cursor.close();
     	db.close();
     	return patient;
+        } else {
+        	cursor.close();
+          	db.close();
+        	return patient;
+        }
+    	
+    	
     }
     
     //get all patients in arraylist by jigneshkumar patel
     
     public ArrayList<Patient> getAllPatients(){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENTREG, null);
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENT, null);
         ArrayList<Patient> listPatients = new ArrayList<Patient>();
         while(cursor.moveToNext()){
         Patient patient = new Patient();
@@ -608,14 +726,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
     public Doctor getDoctor(int doctorId, String firstName, String lastName){
     	SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTORREGISTRATION+" where "+COL_DOCTORID+" = "+
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR+" where "+COL_DOCTORID+" = "+
         							doctorId+" and "+COL_FIRSTNAME+" = \""+
         							firstName+"\" and "+COL_LASTNAME+" = \""+
         							lastName+"\"", null);
-        
-        Doctor doctor = null; 
-        	if (cursor.moveToFirst()){
-        	doctor = new Doctor();
+        Doctor doctor = null;
+        if(cursor.moveToFirst()){
+        doctor = new Doctor();
         doctor.setDoctorId(cursor.getInt(0));
         doctor.setDoctorLoginId(cursor.getInt(1));
         doctor.setFirstName(cursor.getString(2));
@@ -636,9 +753,385 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	cursor.close();
     	db.close();
     	return doctor;
-        	}else {
-        		return doctor;
-        	}
+        } else {
+        	cursor.close();
+        	db.close();
+        	return doctor;
+        }
+        
+        
+    }
+    
+    //Add Receptionist and get receptionist id Manvir
+    public int addReceptionist(Receptionistdb rt) {
+        SQLiteDatabase db = this.getWritableDatabase();
+     
+        ContentValues values = new ContentValues();
+        values.put(COL_RECEPTIONISTLOGINID, rt.getReceptionistLoginId()); 
+        values.put(COL_FIRSTNAME, rt.getFirstName()); 
+        values.put(COL_LASTNAME, rt.getLastName()); 
+        values.put(COL_GENDER, rt.getGender()); 
+        values.put(COL_DOB, rt.getDateOfBirth()); 
+        values.put(COL_EMAIL, rt.getEmail());
+        values.put(COL_PHONE, rt.getPhone()); 
+        values.put(COL_APARTMENT, rt.getApartment());
+        values.put(COL_STREET, rt.getStreet());
+        values.put(COL_CITY, rt.getStreet());
+        values.put(COL_PROVINCE, rt.getProvince());
+        values.put(COL_COUNTRY, rt.getCountry());
+        values.put(COL_POSTALCODE, rt.getPostalCode());
+     
+        // Inserting Row
+        db.insert(TABLE_RECEPTIONISTREGISTRATION, null, values);
+        db.close(); // Closing database connection
+        
+        int rid;
+        SQLiteDatabase dbr = this.getReadableDatabase();
+        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_RECEPTIONISTREGISTRATION, null);
+        cursor.moveToLast();
+        rid = cursor.getInt(0);
+        cursor.close();
+        dbr.close();
+        return rid;
+    }
+    
+    public int getReceptionistId(String firstName, String lastName, int ReceptionistLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_RECEPTIONISTREGISTRATION+" where "+COL_RECEPTIONISTLOGINID+" = "+
+        							ReceptionistLoginId+" and "+COL_FIRSTNAME+" = \""+
+        							firstName+"\" and "+COL_LASTNAME+" = \""+
+        							lastName+"\"", null);
+        cursor.moveToFirst();
+    	int id =  cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return id;
+    	
+    }
+    
+//get all doctors in arraylist by sachin patel
+    
+    public ArrayList<Doctor> getAllDoctors(){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR, null);
+        ArrayList<Doctor> listDoctors = new ArrayList<Doctor>();
+        while(cursor.moveToNext()){
+        Doctor doctor = new Doctor();
+        doctor.setDoctorId(cursor.getInt(0));
+        doctor.setDoctorLoginId(cursor.getInt(1));
+        doctor.setFirstName(cursor.getString(2));
+        doctor.setLastName(cursor.getString(3));
+        doctor.setGender(cursor.getString(4));
+        doctor.setDateOfBirth(cursor.getString(5));
+        doctor.setEmail(cursor.getString(6));
+        doctor.setPhone(cursor.getString(7));
+        doctor.setApartment(cursor.getString(8));
+        doctor.setStreet(cursor.getString(9));
+        doctor.setCity(cursor.getString(10));
+        doctor.setProvince(cursor.getString(11));
+        doctor.setCountry(cursor.getString(12));
+        doctor.setPostalCode(cursor.getString(13));
+        doctor.setExp(cursor.getString(14));
+        doctor.setSpeciality(cursor.getString(15));
+       	doctor.setDepartmentId(cursor.getInt(16));
+        listDoctors.add(doctor);
+        }
+        cursor.close();
+    	db.close();
+    	return listDoctors;
+    }
+    
+    //sachin patel getpatient login Id//
+
+    public int getPatientLoginId(String ut, String un, String up) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_USERLOGIN+" where "+COL_USERTYPE+" = \""+
+        							ut+"\" and "+COL_USERNAME+" = \""+
+        							un+"\" and "+COL_USERPASSWORD+" = \""+
+        							up+"\"", null);
+    
+        if(cursor.moveToFirst()){
+    	int i = cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return i;
+         } else {
+        	 int i =0;
+        	 cursor.close();
+        	 db.close();
+        	 return i;
+         }
+      
+    }
+    
+    public Patient getPatientByLoginId(int patientLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENT+" where "+COL_PATIENTLOGINID+" = "+
+        							patientLoginId, null);
+        cursor.moveToFirst();
+        Patient patient = new Patient();
+        patient.setPatientId(cursor.getInt(0));
+        patient.setPatientLoginId(cursor.getInt(1));
+        patient.setFirstName(cursor.getString(2));
+        patient.setLastName(cursor.getString(3));
+        patient.setGender(cursor.getString(4));
+        patient.setDateOfBirth(cursor.getString(5));
+        patient.setEmail(cursor.getString(6));
+        patient.setPhone(cursor.getString(7));
+        patient.setApartment(cursor.getString(8));
+        patient.setStreet(cursor.getString(9));
+        patient.setCity(cursor.getString(10));
+        patient.setProvince(cursor.getString(11));
+        patient.setCountry(cursor.getString(12));
+        patient.setPostalCode(cursor.getString(13));
+        patient.setHealthPolicyNumber(cursor.getString(14));
+        patient.setInsuranceCompany(cursor.getString(15));
+    	cursor.close();
+    	db.close();
+    	return patient;
+    	
+    }
+    
+    //AddLab by Manvir
+    
+    public int addLab(Lab lb) {
+        SQLiteDatabase db = this.getWritableDatabase();
+     
+        ContentValues values = new ContentValues();
+        values.put(COL_LABLOGINID, lb.getLabLoginId()); 
+        values.put(COL_FIRSTNAME, lb.getFirstName()); 
+        values.put(COL_LASTNAME, lb.getLastName()); 
+        values.put(COL_GENDER, lb.getGender()); 
+        values.put(COL_DOB, lb.getDateOfBirth()); 
+        values.put(COL_EMAIL, lb.getEmail());
+        values.put(COL_PHONE, lb.getPhone()); 
+        values.put(COL_APARTMENT, lb.getApartment());
+        values.put(COL_STREET, lb.getStreet());
+        values.put(COL_CITY, lb.getStreet());
+        values.put(COL_PROVINCE, lb.getProvince());
+        values.put(COL_COUNTRY, lb.getCountry());
+        values.put(COL_POSTALCODE, lb.getPostalCode());
+     
+        // Inserting Row
+        db.insert(TABLE_LABREGISTRATION, null, values);
+        db.close(); // Closing database connection
+        
+        int lid;
+        SQLiteDatabase dbr = this.getReadableDatabase();
+        Cursor cursor = dbr.rawQuery("Select * from "+TABLE_LABREGISTRATION, null);
+        cursor.moveToLast();
+        lid = cursor.getInt(0);
+        cursor.close();
+        dbr.close();
+        return lid;
     }
 
+    public int getLabId(String firstName, String lastName, int LabLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_LABREGISTRATION+" where "+COL_LABLOGINID+" = "+
+        							LabLoginId+" and "+COL_FIRSTNAME+" = \""+
+        							firstName+"\" and "+COL_LASTNAME+" = \""+
+        							lastName+"\"", null);
+        cursor.moveToFirst();
+    	int id =  cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return id;
+    	
+    }
+    
+    //Jignesh patel
+    //methods getDoctorNameList and doctorIdList
+    public ArrayList<String> getDoctorNameList(int departmentId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR+" where "+COL_DOC_DEPARTMENTID+" = "+departmentId, null);
+    
+        ArrayList<String> doctorNameList = new ArrayList<String>();
+        while(cursor.moveToNext()){
+        	doctorNameList.add(cursor.getString(2)+"\t"+cursor.getString(3));
+        }
+        
+     return doctorNameList;
+        
+    }
+    
+    public ArrayList<Integer> getDoctorIdList(int departmentId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR+" where "+COL_DOC_DEPARTMENTID+" = "+departmentId, null);
+    
+        ArrayList<Integer> doctorIdList = new ArrayList<Integer>();
+        while(cursor.moveToNext()){
+        	doctorIdList.add(cursor.getInt(16));
+        }
+        
+     return doctorIdList;
+        
+    }
+
+    //Sukhvir gill
+    public int getDoctorLoginId(String ut, String un, String up) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_USERLOGIN+" where "+COL_USERTYPE+" = \""+
+        							ut+"\" and "+COL_USERNAME+" = \""+
+        							un+"\" and "+COL_USERPASSWORD+" = \""+
+        							up+"\"", null);
+    
+        if(cursor.moveToFirst()){
+    	int i = cursor.getInt(0);
+    	cursor.close();
+    	db.close();
+    	return i;
+         } else {
+        	 int i =0;
+        	 cursor.close();
+        	 db.close();
+        	 return i;
+         }
+      
+    }
+    
+
+    public Doctor getDoctorByLoginId(int doctorLoginId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTOR+" where "+COL_DOCTORLOGINID+" = "+
+        							doctorLoginId, null);
+        cursor.moveToFirst();
+        Doctor doctor = new Doctor();
+        doctor.setDoctorId(cursor.getInt(0));
+        doctor.setDoctorLoginId(cursor.getInt(1));
+        doctor.setFirstName(cursor.getString(2));
+        doctor.setLastName(cursor.getString(3));
+        doctor.setGender(cursor.getString(4));
+        doctor.setDateOfBirth(cursor.getString(5));
+        doctor.setEmail(cursor.getString(6));
+        doctor.setPhone(cursor.getString(7));
+        doctor.setApartment(cursor.getString(8));
+        doctor.setStreet(cursor.getString(9));
+        doctor.setCity(cursor.getString(10));
+        doctor.setProvince(cursor.getString(11));
+        doctor.setCountry(cursor.getString(12));
+        doctor.setPostalCode(cursor.getString(13));
+        doctor.setExp(cursor.getString(14));
+        doctor.setSpeciality(cursor.getString(15));
+       	doctor.setDepartmentId(cursor.getInt(16));
+    	cursor.close();
+    	db.close();
+    	return doctor;
+    }
+    
+    public Patient getPatient(int patientId){
+    	SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_PATIENT+" where "+COL_PATIENTID+" = "+
+        							patientId, null);
+        Patient patient = null;
+        if(cursor.moveToFirst()) {
+        patient = new Patient();
+        patient.setPatientId(cursor.getInt(0));
+        patient.setPatientLoginId(cursor.getInt(1));
+        patient.setFirstName(cursor.getString(2));
+        patient.setLastName(cursor.getString(3));
+        patient.setGender(cursor.getString(4));
+        patient.setDateOfBirth(cursor.getString(5));
+        patient.setEmail(cursor.getString(6));
+        patient.setPhone(cursor.getString(7));
+        patient.setApartment(cursor.getString(8));
+        patient.setStreet(cursor.getString(9));
+        patient.setCity(cursor.getString(10));
+        patient.setProvince(cursor.getString(11));
+        patient.setCountry(cursor.getString(12));
+        patient.setPostalCode(cursor.getString(13));
+        patient.setHealthPolicyNumber(cursor.getString(14));
+        patient.setInsuranceCompany(cursor.getString(15));
+        
+        cursor.close();
+    	db.close();
+    	return patient;
+        } else {
+        	cursor.close();
+          	db.close();
+        	return patient;
+        }
+    	
+
+    	
+    }
+    public ArrayList<String> getDoctorScheduleDayList(int doctorId) {
+    	ArrayList<String> dayList = new ArrayList<String>();
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	Cursor cursor = db.rawQuery("Select Distinct * from "+TABLE_DOCTORSCHEDULE+" where "+COL_SCH_DOCTORID+" = "+doctorId, null);
+    	while(cursor.moveToNext()){
+    		dayList.add(cursor.getString(2));
+    	}
+    	return dayList;
+    	
+    }
+    
+    public ArrayList<String> getDoctorDayTimeList(int doctorId, String day) {
+    	ArrayList<String> dayTimeList = new ArrayList<String>();
+    	String sTime, eTime;
+    	int sMin, eMin, sHour, eHour;
+    	
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	Cursor cursor = db.rawQuery("Select * from "+TABLE_DOCTORSCHEDULE+" where "+COL_SCH_DOCTORID+" = "+doctorId+
+    			COL_DAY+ " = \" "+day+"\"", null);
+    	while(cursor.moveToNext()){
+    		sTime = cursor.getString(3);
+    		eTime = cursor.getString(4);
+    		String[] sSeparated = sTime.split(":");
+    		sHour = Integer.parseInt(sSeparated[0]);
+    		sMin = Integer.parseInt(sSeparated[1]);
+    		String[] eSeparated = eTime.split(":");
+    		eHour = Integer.parseInt(eSeparated[0]);
+    		eMin = Integer.parseInt(eSeparated[1]);
+    		
+    		//8 hours shift logic so if end time go above 24 hour then adding them...
+    		
+    		if (sHour+8 > 24){
+    			eHour = eHour+24; // 
+    		} else if (sHour+8 == 24 && sMin>0){
+    			eHour = eHour+24;
+    		}
+    		while(sHour<=eHour){
+    			
+    			if(sHour<eHour){
+    				String st;
+    				if(sHour>=24){
+    					st = (sHour-24)+":"+sMin;
+    				} else {
+    					st = sHour+":"+sMin;
+    				}
+	    			
+	    			dayTimeList.add(st);
+    				
+	    			if(sMin+30<60){
+		    			sMin = sMin+30;
+		    		} else {
+		    			sMin = sMin - 30;
+		    			sHour++;
+		    		}
+    			} else {
+    				//checking 30 difference for final 30 minutes
+    				if (sMin+30 <= eMin){
+    					String st;
+        				if(sHour>=24){
+        					st = (sHour-24)+":"+sMin;
+        				} else {
+        					st = sHour+":"+sMin;
+        				}
+        				dayTimeList.add(st);
+        				
+    					sMin = sMin+30;
+    				} else {
+		    			break;
+		    		}
+    			}
+	    		
+    		
+    		}
+     		
+    	}
+    	return dayTimeList;
+    	
+    }
+    
 }

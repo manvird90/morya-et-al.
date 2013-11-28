@@ -41,12 +41,12 @@ public class MainActivity extends Activity {
 		Log.d("Insert: " , "Default Users");
 		db.addAdminKey(md5("HospitalAdminEzHealth"));
 		db.addUser(new UserLogin("HospitalAdmin","admin", md5("admin")));
-		db.addUser(new UserLogin("Patient","patient", md5("patient")));
-		db.addUser(new UserLogin("LabStaff","labstaff", md5("labstaff")));
-		db.addUser(new UserLogin("Nurse","nurse", md5("nurse")));
+		//db.addUser(new UserLogin("Patient","patient", md5("patient")));
+		//db.addUser(new UserLogin("LabStaff","labstaff", md5("labstaff")));
+		//db.addUser(new UserLogin("Nurse","nurse", md5("nurse")));
 		db.addUser(new UserLogin("Receptionist","receptionist", md5("receptionist")));
-		db.addUser(new UserLogin("Pharmacist","pharmacist", md5("pharmacist")));
-		db.addUser(new UserLogin("Doctor","doctor", md5("doctor")));
+		//db.addUser(new UserLogin("Pharmacist","pharmacist", md5("pharmacist")));
+		//db.addUser(new UserLogin("Doctor","doctor", md5("doctor")));
 		
 		//add departments 
 		db.addDepartment("Anaesthetics");
@@ -126,7 +126,13 @@ public class MainActivity extends Activity {
 			Intent i = null;
 			switch (TYPEOFUSER.valueOf(userType)){
 			case Patient:
-				i = new Intent(this, HospitalAdmin.class);
+				i = new Intent(this, PatientHomepage.class);
+				int k = db.getPatientLoginId(userType,userName,md5(userPassword));
+				if(k!=0){
+					i.putExtra("patientLoginId", k);
+				} else {
+					Toast.makeText(this, "Not such patient found", Toast.LENGTH_LONG).show();
+				}
 				break;
 			case HospitalAdmin:
 				i = new Intent(this, HospitalAdmin.class);
@@ -141,7 +147,13 @@ public class MainActivity extends Activity {
 				i = new Intent(this, HospitalAdmin.class);
 				break;
 			case Doctor:
-				i = new Intent(this, HospitalAdmin.class);
+				i = new Intent(this,DoctorHomePage.class);
+				int d = db.getDoctorLoginId(userType,userName,md5(userPassword));
+				if(d!=0){
+					i.putExtra("doctorLoginId", d);
+				} else {
+					Toast.makeText(this, "Not such doctor found", Toast.LENGTH_LONG).show();
+				}
 				break;
 			case Pharmacist:
 				i = new Intent(this, HospitalAdmin.class);

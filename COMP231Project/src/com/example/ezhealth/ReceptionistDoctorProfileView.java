@@ -37,3 +37,4 @@ public class ReceptionistDoctorProfileView extends Activity {
 	}
 
 }
+

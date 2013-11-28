@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Receptionist extends Activity {
 
-	private Button btnRegisterPatient, btnSearchPatientInfo, btnSearchDoctorInfo, btnAllPatients;
+	private Button btnRegisterPatient, btnSearchPatientInfo, btnSearchDoctorInfo, btnAllPatients, btnAllDoctors, btnScheduleAppointment;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,15 +54,24 @@ public class Receptionist extends Activity {
 			}
 		});
 		
-//		btnAllDoctors = (Button) findViewById(R.id.btnAllDoctors);
-//		btnAllDoctors.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Intent i = new Intent(getBaseContext(), ReceptionistViewAllPatients.class);
-//				startActivity(i);
-//			}
-//		});
+		btnAllDoctors = (Button) findViewById(R.id.btnAllDoctors);
+		btnAllDoctors.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getBaseContext(), ReceptionistViewAllDoctor.class);
+				startActivity(i);
+			}
+		});
+		btnScheduleAppointment = (Button) findViewById(R.id.btnScheduleAppointment);
+		btnScheduleAppointment.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getBaseContext(), ReceptionistScheduleAppointment.class);
+				startActivity(i);
+			}
+		});
 	}
 
 	@Override
