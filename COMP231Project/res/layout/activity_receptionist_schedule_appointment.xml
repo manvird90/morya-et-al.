@@ -68,6 +68,20 @@
             android:id="@+id/spinnerDoctorName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+        
+         <TextView
+            android:id="@+id/lblDoctorScheduleDay"
+            style="@style/LabelForProfileAttribute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Week Days Doctor Available" />
+         
+         <RadioGroup
+            android:id="@+id/rgDoctorDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </RadioGroup>
 
         <TextView
             android:id="@+id/lblAppointmentDate"

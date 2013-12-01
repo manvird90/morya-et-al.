@@ -42,7 +42,6 @@ public class LabAccount extends Activity {
 				if(password.equals(confirmPassword)){
 					db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
 					labUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
-					finish();
 					Intent i = new Intent(getBaseContext(), AddLab.class);
 					i.putExtra("LabUserId", labUserId);
 					startActivity(i);

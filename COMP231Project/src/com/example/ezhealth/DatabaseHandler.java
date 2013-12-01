@@ -279,8 +279,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 + COL_AVAILABILITYID + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
                 + COL_AVA_APPOINTMENTID + " INTEGER NOT NULL, "
         		+ COL_AVA_DATE + " TEXT NOT NULL, "
-                + COL_AVA_TIME + " TEXT NOT NULL, "
-                + COL_ISAVAILABLE + " TEXT NOT NULL, "
+                + COL_AVA_TIME + " TEXT , "
+                + COL_ISAVAILABLE + " TEXT, "
                + "FOREIGN KEY ("+COL_AVA_APPOINTMENTID+") REFERENCES "+TABLE_APPOINTMENT+"("+COL_APPOINTMENTID+"))";
         
         db.execSQL(CREATE_AVAILABILITY_TABLE);
@@ -1132,6 +1132,21 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	}
     	return dayTimeList;
     	
+    }
+    
+    public void addAppointment(int patId, int docId, int deptId, String date, String time){
+    	 SQLiteDatabase db = this.getWritableDatabase();
+         
+         ContentValues values = new ContentValues(); 
+         values.put(COL_APP_PATIENTID, patId); 
+         values.put(COL_APP_DOCTORID, docId); 
+         values.put(COL_APP_DEPARTMENTID, deptId); 
+         values.put(COL_DATE, date); 
+         values.put(COL_TIME, time);
+      
+         // Inserting Row
+         db.insert(TABLE_APPOINTMENT, null, values);
+         db.close(); // Closing database connection
     }
     
 }

@@ -33,19 +33,15 @@ public class HospitalAdmin extends Activity {
         		Intent intent = null;
 					 switch(position){
 					 case 0:
-						 finish();
 						 intent = new Intent(view.getContext(), DoctorAccount.class);
 						 break;
 					 case 1:
-						 finish();
 						 intent = new Intent(view.getContext(), ReceptionistAccount.class);
 						 break;
 					 case 2:
-						 finish();
 						 intent = new Intent(view.getContext(), LabAccount.class);
 						 break;
 					 case 3:
-						 finish();
 						 intent = new Intent(view.getContext(), AddPharmacist.class);
 						 break;
 					 case 4:

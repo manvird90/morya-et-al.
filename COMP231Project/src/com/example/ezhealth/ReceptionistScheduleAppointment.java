@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -25,18 +26,21 @@ import android.widget.Toast;
 public class ReceptionistScheduleAppointment extends Activity implements OnItemSelectedListener{
 
 	private Spinner spinnerDoctor, spinnerDepartment;
-	private RadioGroup appointmentTime;
+	private RadioGroup rgAppointmentTime, rgDoctorDays;
 	private RadioButton firstSlot, secondSlot, thirdSlot;
-	private Button selectDate, btnGetPatient;
+	private Button selectDate, btnGetPatient, makeAppointment, done;
 	private ArrayList<String> deptList, doctorNameList;
 	private ArrayList<Integer> doctorIdList;
 	private TextView tv, tvPatientName;
 	private EditText etPatientId;
 	private int departmentId, doctorId;
+	private String appointmentTime = null; 
+	private String appointmentDate =null;
+	private String appointmentDay = null;
 	
 	final DatabaseHandler db = new DatabaseHandler(this);
-	Patient patient = new Patient();
-	
+	Patient patient = null;
+	Doctor doctor = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,13 @@ public class ReceptionistScheduleAppointment extends Activity implements OnItemS
 		btnGetPatient = (Button) findViewById(R.id.btnGetPatient);
 		etPatientId = (EditText) findViewById(R.id.etPatientId);
 		tvPatientName = (TextView) findViewById(R.id.tvPatientName);
+		rgDoctorDays = (RadioGroup) findViewById(R.id.rgDoctorDays);
+		rgAppointmentTime = (RadioGroup) findViewById(R.id.rgAppointmentTime);
+		makeAppointment = (Button) findViewById(R.id.btnMakeAppointment);
+		done = (Button) findViewById(R.id.btnDone);
+		
+
+		
 		
 		btnGetPatient.setOnClickListener(new View.OnClickListener() {
 			
@@ -60,7 +71,7 @@ public class ReceptionistScheduleAppointment extends Activity implements OnItemS
 						tvPatientName.setText("Patient name is "+patient.getFirstName()+"\t"+patient.getLastName());
 						
 					} catch (NumberFormatException e){
-						Toast.makeText(getBaseContext(), "Enter valis patient id!!", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getBaseContext(), "Enter valid patient id!!", Toast.LENGTH_SHORT).show();
 					}
 					
 				} else {
@@ -81,19 +92,58 @@ public class ReceptionistScheduleAppointment extends Activity implements OnItemS
 		deptList = db.getDepartmentList();
 		spinnerDepartment.setAdapter(new MyAdapter(deptList));
 		spinnerDepartment.setOnItemSelectedListener(this);
+		  spinnerDoctor.setOnItemSelectedListener(this);
 		
 		selectDate.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getBaseContext(), CalView.class);
+				if(patient!=null){
+					Intent i = new Intent(getBaseContext(), CalView.class);
+					try{
+						appointmentDay = ((RadioButton)findViewById(rgDoctorDays.getCheckedRadioButtonId() )).getText().toString();
+				    	i.putExtra("appointmentDay", appointmentDay);
+						startActivityForResult(i, 1);
+						if(appointmentDate!=null){
+							db.getDoctorScheduleDayList(doctorId);
+						} else {
+							Toast.makeText(getBaseContext(), "Date Selection is required!", Toast.LENGTH_SHORT).show();
+						}
+					} catch (Exception e) {
+						Toast.makeText(getBaseContext(), "You have not selected doctor OR \n"+
+								"Doctor appointment is not available OR\n"+
+								"You have not selected day from above radiobutton", Toast.LENGTH_SHORT).show();
+					}
+				   
+					
+				} else {
+					Toast.makeText(getBaseContext(), "Patient information is not retrieved!!", Toast.LENGTH_SHORT).show();
+				}
+			}
+			
+		});
+		
+		makeAppointment.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try{
+				db.addAppointment(patient.getPatientId(), doctor.getDoctorId(), departmentId, appointmentDate, appointmentTime);
+				} catch (Exception e){
+					Toast.makeText(getBaseContext(), "Error in inserting appointment", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		
+		done.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getBaseContext(), Receptionist.class);
 				startActivity(i);
 				
 			}
 		});
-		
-
 		
 	}
 
@@ -109,16 +159,28 @@ public class ReceptionistScheduleAppointment extends Activity implements OnItemS
 	 @Override
 	 public void onItemSelected(AdapterView<?> parent, View v, int position,long id) {
 
+		
 		if(parent.getId() == R.id.spinnerDeptartmentAppointment){
+			rgDoctorDays.clearCheck();
+			rgDoctorDays.removeAllViews();
 			  tv.setText(deptList.get(position));
 			  departmentId = position+1;
 			  doctorNameList = db.getDoctorNameList(departmentId);
 			  doctorIdList = db.getDoctorIdList(departmentId);
 			  spinnerDoctor.setAdapter(new MyAdapter(doctorNameList));
-		}
-		
-		if(parent.getId() == R.id.spinnerDoctorName){
-			  
+		} else if (parent.getId() == R.id.spinnerDoctorName){
+			rgDoctorDays.clearCheck();
+			rgDoctorDays.removeAllViews();
+			
+			ArrayList<String> day = new ArrayList<String>();
+			day = db.getDoctorScheduleDayList(doctorIdList.get(position));
+			
+			for (int i =0; i < day.size(); i++){
+				RadioButton rb = new RadioButton(this);
+				rb.setText(day.get(i));
+				rb.setId(i);
+				rgDoctorDays.addView(rb);
+			}
 		}
 		
 	 }
@@ -172,4 +234,46 @@ public class ReceptionistScheduleAppointment extends Activity implements OnItemS
             return text;
         }
     }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+    	  if (requestCode == 1) {
+
+    	     if(resultCode == RESULT_OK){      
+    	         appointmentDate = intent.getStringExtra("appointmentDate");
+    	         //ArrayList<String> timeList = null;
+    	         try{
+    	        	 String did = Integer.toString(doctor.getDoctorId());
+    	             new RetrieveTime().execute(appointmentDay, did);
+    	         } catch (Exception e){
+    	        	 Toast.makeText(getBaseContext(), "Error in retriving time list", Toast.LENGTH_SHORT).show();
+    	         }
+    	         
+    	     }
+    	     
+    	  }
+    	}
+    
+    
+    private class RetrieveTime extends AsyncTask<String, Void, ArrayList<String>> {
+
+    	
+        @Override
+        protected ArrayList<String> doInBackground(String... params) {
+        	
+        	ArrayList<String> timeList = null;
+        	 timeList = db.getDoctorDayTimeList(Integer.parseInt(params[1]), params[0]);
+            return timeList;
+        }        
+        protected void onPostExecute(ArrayList<String> list) {
+        	 for (int i =0; i < list.size(); i++){
+	 				RadioButton rb = new RadioButton(getBaseContext());
+	 				rb.setText(list.get(i));
+	 				rb.setId(i);
+	 				rgAppointmentTime.addView(rb);
+	 			}
+			
+		}
+    }
+ 
 }
