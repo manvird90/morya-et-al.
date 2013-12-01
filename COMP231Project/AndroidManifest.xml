@@ -161,6 +161,10 @@
             android:name="com.example.ezhealth.CalView"
             android:label="@string/title_activity_cal_view" >
         </activity>
+        <activity
+            android:name="com.example.ezhealth.DoctorLoginBtn"
+            android:label="@string/title_activity_doctor_login_btn" >
+        </activity>
     </application>
 
 </manifest>

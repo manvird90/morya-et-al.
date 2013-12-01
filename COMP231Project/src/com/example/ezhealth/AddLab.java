@@ -100,6 +100,7 @@ public class AddLab extends Activity {
 				
 				db.close();
 				Toast.makeText(getBaseContext(),"Lab id is " + displayLabId, Toast.LENGTH_SHORT).show();
+				finish();
 				Intent intent = new Intent(getBaseContext(), HospitalAdmin.class);
 				startActivity(intent);
 				} else {

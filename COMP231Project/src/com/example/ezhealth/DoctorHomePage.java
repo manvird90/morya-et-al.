@@ -2,6 +2,7 @@ package com.example.ezhealth;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class DoctorHomePage extends Activity {
 				doctor.getCity().toString()+"\n"+
 				doctor.getProvince().toString()+"\n"+
 				doctor.getCountry().toString());
+		
 		
 	}
 

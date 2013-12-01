@@ -38,6 +38,11 @@ public class PatientHomepage extends Activity {
 		
 		
 	}
+	public void action_logout(View v){
+		finish();
+		Intent z = null;
+		z = new Intent(this, MainActivity.class);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

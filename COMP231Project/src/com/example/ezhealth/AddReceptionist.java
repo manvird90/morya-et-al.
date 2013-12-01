@@ -104,6 +104,7 @@ final Calendar calendar=null;
 				
 				db.close();
 				Toast.makeText(getBaseContext(),"Receptionist id is " + displayReceptionistId, Toast.LENGTH_SHORT).show();
+				finish();
 				Intent intent = new Intent(getBaseContext(), HospitalAdmin.class);
 				startActivity(intent);
 				} else {
@@ -120,7 +121,7 @@ final Calendar calendar=null;
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_doctor, menu);
+		getMenuInflater().inflate(R.menu.add_receptionist, menu);
 		return true;
 	}
 	int buffer1=0;

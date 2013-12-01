@@ -44,6 +44,7 @@ public class ReceptionistAccount extends Activity {
 						if(password.equals(confirmPassword)){
 						db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
 						receptionistUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
+						finish();
 						Intent i = new Intent(getBaseContext(), AddReceptionist.class);
 						i.putExtra("ReceptionistUserId", receptionistUserId);
 						startActivity(i);
