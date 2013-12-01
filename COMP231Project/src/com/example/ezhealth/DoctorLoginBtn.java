@@ -21,8 +21,6 @@ public class DoctorLoginBtn extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(getBaseContext(), DoctorHomePage.class);
-				int doctorLoginId = getIntent().getExtras().getInt("doctorLoginId");
-				Doctor doctor = db.getDoctorByLoginId(doctorLoginId);
 				startActivity(i);
 			}
 		});
