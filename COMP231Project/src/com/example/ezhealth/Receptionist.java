@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class Receptionist extends Activity {
 
-	private Button btnRegisterPatient, btnSearchPatientInfo, btnSearchDoctorInfo, btnAllPatients, btnAllDoctors, btnScheduleAppointment;
+	private Button btnRegisterPatient, btn, btnSearchPatientInfo, btnSearchDoctorInfo, btnAllPatients, btnAllDoctors, btnScheduleAppointment;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,6 +85,7 @@ public class Receptionist extends Activity {
 	 public boolean onOptionsItemSelected(MenuItem item) 
 	    {    
 	    	Intent intent= new Intent(this, MainActivity.class);
+	    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	    	startActivity(intent);
 	    	return true;
 	    }

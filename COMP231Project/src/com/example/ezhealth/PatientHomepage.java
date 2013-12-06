@@ -9,35 +9,35 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class PatientHomepage extends Activity {
-
-	private TextView profileTitle, displayName,displayContact, displayAddress, displayInsuraceInfo;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_patient_homepage);
-		int patientLoginId = getIntent().getExtras().getInt("patientLoginId");
-		final DatabaseHandler db = new DatabaseHandler(this);
-		Patient patient = db.getPatientByLoginId(patientLoginId);
-		profileTitle = (TextView) findViewById(R.id.patientProfileTitle);
-		profileTitle.setText("Patient Profile ID: "+patient.getPatientId());
-		
-		displayName = (TextView) findViewById(R.id.displayName);
-		displayName.setText(patient.getFirstName().toUpperCase()+" "+patient.getLastName().toUpperCase());
-		displayContact = (TextView) findViewById(R.id.displayContact);
-		displayContact.setText("Phone: " + patient.getPhone().toString()+
-				"\nEmail: " + patient.getEmail().toString());
-		displayAddress = (TextView) findViewById(R.id.displayAddress);
-		displayAddress.setText(patient.getApartment().toString()+"\n"+
-				patient.getStreet().toString()+"\n"+
-				patient.getCity().toString()+"\n"+
-				patient.getProvince().toString()+"\n"+
-				patient.getCountry().toString());
-		displayInsuraceInfo = (TextView) findViewById(R.id.displayInsuranceInfo);
-		displayInsuraceInfo.setText("Policy Number: "+patient.getHealthPolicyNumber().toString()+
-				"\nInsurance Company: " + patient.getInsuranceCompany().toString());
-		
-		
-	}
+		private Button btnProfile,btnScheduleAppointment;
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_patient_homepage);
+			final int patientLoginId = getIntent().getExtras().getInt("patientLoginId");
+			
+			btnProfile = (Button) findViewById(R.id.btnProfile);
+			btnProfile.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(getBaseContext(), PatientProfile.class);
+					i.putExtra("patientLoginId", patientLoginId);
+					startActivity(i);
+				}
+			});
+		btnScheduleAppointment = (Button) findViewById(R.id.btnScheduleAppointment);
+			btnScheduleAppointment.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(getBaseContext(), ReceptionistScheduleAppointment.class);
+					startActivity(i);
+				}
+			}); 
+			
+			
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

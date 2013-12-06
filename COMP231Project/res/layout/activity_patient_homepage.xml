@@ -1,75 +1,59 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout"
+    android:id="@+id/TableLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ReceptionistPatientProfileView" >
 
-    <TextView
-        android:id = "@+id/patientProfileTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/WelcomeLineOnEachPage" />
+       <TableRow
+            android:id="@+id/trdocprofile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:paddingLeft="10sp">
+
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawablePadding="-15sp"
+            android:drawableTop="@drawable/btnprofile"
+            android:paddingLeft="10sp"
+            android:paddingRight="5sp"
+            android:paddingTop="25sp"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnScheduleAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawablePadding="-15sp"
+            android:drawableTop="@drawable/btn_appointment"
+            android:paddingLeft="15sp"
+            android:paddingRight="5sp"
+            android:paddingTop="25sp"
+            android:textColor="#FFFFFF" />
+        </TableRow>
+         <TableRow
+            android:id="@+id/trappdetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:paddingLeft="10sp">
+
+        <Button
+            android:id="@+id/btnAppoinmentDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawablePadding="-15sp"
+            android:drawableTop="@drawable/btnappointmentdetails"
+            android:paddingLeft="10sp"
+            android:paddingRight="5sp"
+            android:paddingTop="25sp"
+            android:textColor="#FFFFFF" />
+        </TableRow>
+
+        
+    </TableLayout>
     
-    <TextView
-        android:id = "@+id/lblName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/LabelForProfileAttribute"
-        android:layout_marginTop="10dp"
-        android:text="Name" />
-    <TextView
-        android:id = "@+id/displayName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-    
-        <TextView
-        android:id = "@+id/lblContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        style = "@style/LabelForProfileAttribute"
-        android:text="Contact Information" />
-    <TextView
-        android:id = "@+id/displayContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-    
-        <TextView
-        android:id = "@+id/lblAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        style = "@style/LabelForProfileAttribute"
-        android:text="Address" />
-    <TextView
-        android:id = "@+id/displayAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-    
-        <TextView
-        android:id = "@+id/lblInsuranceInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        style = "@style/LabelForProfileAttribute"
-        android:text="Insurance Policy Information" />
-    <TextView
-        android:id = "@+id/displayInsuranceInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:textSize="14sp" />
-   
-</LinearLayout>

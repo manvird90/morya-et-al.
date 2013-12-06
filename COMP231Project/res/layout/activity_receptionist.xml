@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+      android:background="#D6E0FF"
     tools:context=".Receptionist" >
     
     <TableRow
             android:id="@+id/trPatientSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:paddingLeft="30sp">
+            android:paddingLeft="10sp">
 
     <Button
         android:id="@+id/btnRegisterPatient"
@@ -18,8 +19,8 @@
         android:drawableTop="@drawable/btn_receptionist_patient_registration"
         android:textColor="#FFFFFF"
         android:paddingTop="25sp"
-        android:paddingLeft="25sp"
-        android:paddingRight="25sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="5sp"
         android:drawablePadding="-15sp"/>
     
         <Button
@@ -27,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableTop="@drawable/btn_receptionist_search_doctor_information"
+        android:drawableTop="@drawable/btn_receptionist_search_doctor"
         android:textColor="#FFFFFF"
         android:paddingTop="25sp"
-        android:paddingLeft="25sp"
-        android:paddingRight="25sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="5sp"
         android:drawablePadding="-15sp"/>
         </TableRow>
         
@@ -39,18 +40,18 @@
         android:id="@+id/trDocSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="30sp" >
+        android:paddingLeft="10sp" >
        
         <Button
         android:id="@+id/btnSearchPatientInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableTop="@drawable/btn_receptionist_search_patient_information"
+        android:drawableTop="@drawable/btn_receptionist_search_patient"
         android:textColor="#FFFFFF"
         android:paddingTop="25sp"
-        android:paddingLeft="25sp"
-        android:paddingRight="25sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="5sp"
         android:drawablePadding="-15sp"/>
         <Button
         android:id="@+id/btnAllPatients"
@@ -60,8 +61,8 @@
         android:drawableTop="@drawable/btn_receptionist_all_patients"
         android:textColor="#FFFFFF"
         android:paddingTop="25sp"
-        android:paddingLeft="25sp"
-        android:paddingRight="25sp"
+        android:paddingLeft="10sp"
+        android:paddingRight="5sp"
         android:drawablePadding="-15sp"/>
      </TableRow>
      
@@ -69,7 +70,7 @@
         android:id="@+id/trAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="30sp" >
+        android:paddingLeft="10sp" >
        
         <Button
         android:id="@+id/btnAllDoctors"
@@ -79,21 +80,22 @@
         android:drawableTop="@drawable/btn_receptionist_all_doctors"
         android:textColor="#FFFFFF"
         android:paddingTop="25sp"
-        android:paddingLeft="25sp"
-        android:paddingRight="25sp"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp"
         android:drawablePadding="-15sp"/>
         <Button
         android:id="@+id/btnScheduleAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableTop="@drawable/btn_receptionist_schedule_patient_appointment"
+        android:drawableTop="@drawable/btn_appointment"
         android:textColor="#FFFFFF"
         android:paddingTop="25sp"
-        android:paddingLeft="25sp"
-        android:paddingRight="25sp"
+        android:paddingLeft="5sp"
+        android:paddingRight="5sp"
         android:drawablePadding="-15sp"/>
         
         </TableRow>
+
 
 </TableLayout>

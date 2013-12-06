@@ -1,5 +1,6 @@
 package com.example.ezhealth;
 
+import com.example.ezhealth.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,20 +40,30 @@ public class DoctorAccount extends Activity {
 				password = etPassword.getText().toString();
 				confirmPassword = etConfirmPassword.getText().toString();
 				if(db.isUserNameAvailable(userName)){
+					Toast.makeText(getBaseContext(), " "+db.isUserNameAvailable(userName)+ " " , Toast.LENGTH_SHORT).show();
+					if(password.length()>=6){
 					if(password.equals(confirmPassword)){
 						db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
 						doctorUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
+						finish();
 						Intent i = new Intent(getBaseContext(), AddDoctor.class);
 						i.putExtra("DoctorUserId", doctorUserId);
 						startActivity(i);
 						
+						
 					} else {
-						Toast.makeText(getBaseContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
-						etPassword.setText("");
+						etConfirmPassword.setError("Password do not match");
 						etConfirmPassword.setText("");
 					}
-			
-				} else {
+						}
+						else {
+							etPassword.setError("Password must have 6 Characters");
+							etPassword.setText("");
+							etConfirmPassword.setText("");
+						}
+				} 
+			else 
+			{
 					Toast.makeText(getBaseContext(), "This username is not available for you!! Try other one!!", Toast.LENGTH_SHORT).show();
 					etUserName.setText("");
 					etPassword.setText("");
@@ -62,6 +73,9 @@ public class DoctorAccount extends Activity {
 		});
 		
 	}
+
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

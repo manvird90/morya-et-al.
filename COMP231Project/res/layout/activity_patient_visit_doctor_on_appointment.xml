@@ -1,0 +1,144 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatientVisitDoctorOnAppointment" >
+
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+          <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+         android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        
+        <EditText
+            android:id="@+id/etAppointmentId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:hint="Enter Appointment ID" />
+        
+         <Button
+            android:id="@+id/btnGetAppointment"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft = "10dp"
+            android:layout_weight="0.5"
+            android:text = "Get" />
+         </LinearLayout>
+         
+        <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+         <TextView
+            android:id="@+id/lblPatientName"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            android:text="Patient: "
+            android:layout_height="wrap_content" />
+         
+         <TextView
+            android:id="@+id/tvPName"
+            style="@style/WelcomeLineOnEachPage" 
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            android:layout_height="wrap_content" />
+         </LinearLayout>
+
+        <LinearLayout
+        android:id="@+id/LinearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+         <TextView
+            android:id="@+id/lblDoctorName"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            android:text="Doctor: "
+            android:layout_height="wrap_content" />
+         
+         <TextView
+            android:id="@+id/tvDName"
+            style="@style/WelcomeLineOnEachPage" 
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            android:layout_height="wrap_content" />
+         </LinearLayout>
+       
+        <TextView
+            android:id="@+id/lblSymptoms"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Signs and Symptoms"
+            android:layout_height="wrap_content" />
+         
+        <EditText
+            android:id="@+id/etSymptoms"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:minLines="5" 
+    		android:gravity="top|left" 
+ 			android:scrollbars="vertical" />
+        
+        <TextView
+            android:id="@+id/lblPrescription"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Prescription"
+            android:layout_height="wrap_content" />
+         
+        <EditText
+            android:id="@+id/etPrescription"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:minLines="5" 
+    		android:gravity="top|left" 
+ 			android:scrollbars="vertical" />
+        
+        <TextView
+            android:id="@+id/lblTreatment"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Treatment Plan"
+            android:layout_height="wrap_content" />
+         
+        <EditText
+            android:id="@+id/etTreatment"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:minLines="5" 
+    		android:gravity="top|left" 
+ 			android:scrollbars="vertical" />
+         
+        <Button 
+             android:id="@+id/btnAddTreatment"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Appointment Detail"/>
+        
+         </LinearLayout>
+         
+
+</ScrollView>

@@ -10,118 +10,192 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv"
-            style="@style/WelcomeLineOnEachPage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        
-        <TextView
-            android:id="@+id/lblPatient"
-            style="@style/LabelForProfileAttribute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Patient ID" />
+          <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+         android:layout_marginTop="25dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
         
         <EditText
             android:id="@+id/etPatientId"
             style="@style/LabelForProfileAttribute"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:hint="Enter Patient ID" />
         
          <Button
             android:id="@+id/btnGetPatient"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft = "10dp"
+            android:layout_weight="0.5"
             android:text = "Get Patient" />
+         </LinearLayout>
+         
+        <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
+         <TextView
+            android:id="@+id/lblPatientName"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            android:text="Patient Name: "
+            android:layout_height="wrap_content" />
          
          <TextView
             android:id="@+id/tvPatientName"
             style="@style/WelcomeLineOnEachPage" 
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
             android:layout_height="wrap_content" />
+         </LinearLayout>
 
+        <LinearLayout
+        android:id="@+id/LinearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
         <TextView
             android:id="@+id/lblDepartment"
-            style="@style/LabelForProfileAttribute"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            style="@style/WelcomeLineOnEachPage"
             android:layout_height="wrap_content"
-            android:text="Department" />
+            android:text="Department Name: " />
         
 
         <Spinner
             android:id="@+id/spinnerDeptartmentAppointment"
-            android:layout_width="fill_parent"
+            android:layout_weight = "0.5"
             android:layout_height="wrap_content" 
+            android:layout_width="0dp"
             android:drawSelectorOnTop="true"/>
+        </LinearLayout>
 
+        <LinearLayout
+        android:id="@+id/LinearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
         <TextView
             android:id="@+id/lblDoctorName"
-            style="@style/LabelForProfileAttribute"
-            android:layout_width="wrap_content"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_weight = "0.5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Doctor Name" />
+            android:text="Doctor Name: " />
 
         <Spinner
             android:id="@+id/spinnerDoctorName"
-            android:layout_width="fill_parent"
+            android:layout_weight = "0.5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content" />
+        </LinearLayout>
         
+        <LinearLayout
+        android:id="@+id/LinearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
          <TextView
             android:id="@+id/lblDoctorScheduleDay"
-            style="@style/LabelForProfileAttribute"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_weight = "0.5"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Week Days Doctor Available" />
+            android:text="Select Day: " />
          
          <RadioGroup
             android:id="@+id/rgDoctorDays"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </RadioGroup>
-
+            android:layout_weight = "0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+      
+		</LinearLayout>
+		
+        <LinearLayout
+        android:id="@+id/LinearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
         <TextView
             android:id="@+id/lblAppointmentDate"
-            style="@style/LabelForProfileAttribute"
-            android:layout_width="wrap_content"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Appointment Date" />
+            android:text="Select Date: " />
 
         <Button
             android:id="@+id/btnSelectDate"
-            android:layout_width="match_parent"
+            android:layout_weight = "0.5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text = "Select Date" />
+            android:text = "Calendar" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/lblSelectTime"
-            style="@style/LabelForProfileAttribute"
+            android:id="@+id/tvDate"
+            style="@style/WelcomeLineOnEachPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Select Time" />
+            android:layout_gravity="right"/>
+        
+        <LinearLayout
+        android:id="@+id/LinearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/lblSelectTime"
+            style="@style/WelcomeLineOnEachPage"
+            android:layout_width="0dp"
+            android:layout_weight = "0.5"
+            android:layout_height="wrap_content"
+            android:text="Select Time: " />
 
-        <RadioGroup
-            android:id="@+id/rgAppointmentTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/spinnerTime"
+            android:layout_weight = "0.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" 
+            android:drawSelectorOnTop="true"/>
+        </LinearLayout>
+        
+        
+        <LinearLayout
+        android:id="@+id/LinearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/btnMakeAppointment"
-            android:layout_width="fill_parent"
+            android:layout_weight = "0.6"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Make an Appointment" />
+            android:text="Book an Appointment" />
 
         <Button
             android:id="@+id/btnDone"
-            android:layout_width="fill_parent"
+            android:layout_weight = "0.3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="Done" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

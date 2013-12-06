@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -93,6 +94,13 @@ public class AdminAddDoctorSchedule extends Activity {
 		getMenuInflater().inflate(R.menu.admin_add_doctor_schedule, menu);
 		return true;
 	}
+	public boolean onOptionsItemSelected(MenuItem item) 
+    {    
+    	Intent intent= new Intent(this, MainActivity.class);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	startActivity(intent);
+    	return true;
+    }
 	
 	public void setCurrentTimeOnView() {
 		 

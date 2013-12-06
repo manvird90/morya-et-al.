@@ -161,6 +161,18 @@
             android:name="com.example.ezhealth.CalView"
             android:label="@string/title_activity_cal_view" >
         </activity>
+        <activity
+            android:name="com.example.ezhealth.DoctorLoginBtn"
+            android:label="@string/title_activity_doctor_login_btn" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.PatientVisitDoctorOnAppointment"
+            android:label="@string/title_activity_patient_visit_doctor_on_appointment" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.PatientProfile"
+            android:label="@string/title_activity_patient_profile" >
+        </activity>
     </application>
 
 </manifest>

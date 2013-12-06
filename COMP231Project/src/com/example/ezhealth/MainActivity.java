@@ -52,7 +52,6 @@ public class MainActivity extends Activity {
 		db.addDepartment("Anaesthetics");
 		db.addDepartment("Cardiology");
 		db.addDepartment("ENT");
-		db.addDepartment("Anaesthetics");
 		db.addDepartment("Critical Care");
 		db.addDepartment("General Surgery");
 		db.addDepartment("Gastroenterology");
@@ -147,7 +146,7 @@ public class MainActivity extends Activity {
 				i = new Intent(this, HospitalAdmin.class);
 				break;
 			case Doctor:
-				i = new Intent(this,DoctorHomePage.class);
+				i = new Intent(this,DoctorLoginBtn.class);
 				int d = db.getDoctorLoginId(userType,userName,md5(userPassword));
 				if(d!=0){
 					i.putExtra("doctorLoginId", d);
