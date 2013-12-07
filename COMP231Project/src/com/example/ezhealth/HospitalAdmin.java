@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 public class HospitalAdmin extends Activity {
 
-	String[] registerStaff = new String[] {"Register a Doctor", "Register a Receptionist", "Register LabStaff", "Register a Pharmacist","Add Doctor Schedule"};
+	String[] registerStaff = new String[] {"Register a Doctor", "Register a Receptionist", "Register LabStaff","Add Doctor Schedule"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,6 @@ public class HospitalAdmin extends Activity {
 						 intent = new Intent(view.getContext(), LabAccount.class);
 						 break;
 					 case 3:
-						 intent = new Intent(view.getContext(), AddPharmacist.class);
-						 break;
-					 case 4:
 						 intent = new Intent(view.getContext(), AdminDoctorSearchToAddSchedule.class);
 						 break;
 					 }

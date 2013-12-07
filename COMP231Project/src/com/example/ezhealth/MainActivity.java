@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 	
 	//GUI variables//
 	private String userType, userName, userPassword, hexPassword;
-	static enum TYPEOFUSER { Patient, HospitalAdmin, Receptionist, Doctor, Nurse,Pharmacist, LabStaff};
+	static enum TYPEOFUSER { Patient, HospitalAdmin, Receptionist, Doctor,LabStaff};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -134,9 +134,7 @@ public class MainActivity extends Activity {
 			case Receptionist:
 				i = new Intent(this, Receptionist.class);
 				break;
-			case Nurse:
-				i = new Intent(this, HospitalAdmin.class);
-				break;
+			
 			case LabStaff:
 				i = new Intent(this, HospitalAdmin.class);
 				break;
@@ -148,9 +146,6 @@ public class MainActivity extends Activity {
 				} else {
 					Toast.makeText(this, "Not such doctor found", Toast.LENGTH_LONG).show();
 				}
-				break;
-			case Pharmacist:
-				i = new Intent(this, HospitalAdmin.class);
 				break;
 			}
 			startActivity(i);
