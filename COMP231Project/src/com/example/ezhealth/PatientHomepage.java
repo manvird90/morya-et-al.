@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class PatientHomepage extends Activity {
-		private Button btnProfile,btnScheduleAppointment;
+		private Button btnProfile,btnScheduleAppointment, btnViewAppointment;
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_patient_homepage);
 			final int patientLoginId = getIntent().getExtras().getInt("patientLoginId");
+			final DatabaseHandler db = new DatabaseHandler(this);
+			final Patient patient = db.getPatientByLoginId(patientLoginId);
 			
 			btnProfile = (Button) findViewById(R.id.btnProfile);
 			btnProfile.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +34,18 @@ public class PatientHomepage extends Activity {
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(getBaseContext(), ReceptionistScheduleAppointment.class);
+					i.putExtra("patientId", patient.getPatientId());
+					startActivity(i);
+				}
+			}); 
+			
+			btnViewAppointment = (Button) findViewById(R.id.btnViewAppointment);
+			btnViewAppointment.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(getBaseContext(), PatientViewAppointments.class);
+					i.putExtra("patientId", patient.getPatientId());
 					startActivity(i);
 				}
 			}); 

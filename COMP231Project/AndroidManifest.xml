@@ -173,6 +173,14 @@
             android:name="com.example.ezhealth.PatientProfile"
             android:label="@string/title_activity_patient_profile" >
         </activity>
+        <activity
+            android:name="com.example.ezhealth.PatientViewAppointments"
+            android:label="@string/title_activity_patient_view_appointments" >
+        </activity>
+        <activity
+            android:name="com.example.ezhealth.AppointmentDetail"
+            android:label="@string/title_activity_appointment_detail" >
+        </activity>
     </application>
 
 </manifest>

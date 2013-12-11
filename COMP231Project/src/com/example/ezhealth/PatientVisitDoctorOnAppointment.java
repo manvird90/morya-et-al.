@@ -64,22 +64,25 @@ public class PatientVisitDoctorOnAppointment extends Activity {
 			@Override
 			public void onClick(View v) {
 				if(appointmentId!=0){
-					if(etSymptoms.getText().toString()!="" ){
+					if(!etSymptoms.getText().toString().trim().equals("") ){
+						Toast.makeText(getBaseContext(), "I am in", Toast.LENGTH_SHORT).show();
+						try{
+							Toast.makeText(getBaseContext(), "I am in try", Toast.LENGTH_SHORT).show();
 						Treatment trt = new Treatment();
 						trt.setAppointmentId(appointmentId);
-						trt.setSymptoms(etSymptoms.getText().toString());
-						trt.setPrescription(etPrescription.getText().toString());
-						trt.setTreatment(etTreatment.getText().toString());
-						try{
+						trt.setSymptoms(etSymptoms.getText().toString().trim());
+						trt.setPrescription(etPrescription.getText().toString().trim());
+						trt.setTreatment(etTreatment.getText().toString().trim());
 						db.addTreatment(trt);
-						Intent i = new Intent(getBaseContext(), DoctorHomePage.class);
-						i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(i);
+						//Intent i = new Intent(getBaseContext(), DoctorLoginBtn.class);
+						//i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						//startActivity(i);
+						Toast.makeText(getBaseContext(), "Treatment added for appointment id "+appointmentId, Toast.LENGTH_SHORT).show();
 						} catch (Exception e){
-							Toast.makeText(getBaseContext(), "Erro while entering treatment", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getBaseContext(), "Error while entering treatment", Toast.LENGTH_SHORT).show();
 						}
 					} else {
-						Toast.makeText(getBaseContext(), "Enter Symptoms Atleast", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getBaseContext(), "Enter Symptoms", Toast.LENGTH_SHORT).show();
 					}
 				} else {
 					Toast.makeText(getBaseContext(), "Enter Appointment Id and Get Detail and Verify", Toast.LENGTH_SHORT).show();

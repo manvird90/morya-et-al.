@@ -167,12 +167,21 @@ public class ReceptionistScheduleAppointment extends Activity{
                                 try{
                                 	if(appointmentTime != null){
                                 db.addAppointment(patient.getPatientId(), doctorId, departmentId, appointmentDate, appointmentTime);
+                                
+                                
+                                Toast.makeText(getBaseContext(), "Appointment ID: "+db.getAppointmentId()+
+                                		"\nDoctor ID: " +doctorId+
+                                		"\nPatient ID: "+patient.getPatientId()+
+                                		"\nDate: "+appointmentDate+
+                                		"\nTime: "+ appointmentTime, Toast.LENGTH_SHORT).show();
                                 } else {
                                 	Toast.makeText(getBaseContext(), "No time available", Toast.LENGTH_SHORT).show();
                                 }
                                 } catch (Exception e){
                                 Toast.makeText(getBaseContext(), "Error while booking an appointment", Toast.LENGTH_SHORT).show();
                                 }
+                                
+                                
                         }
                 });
                 

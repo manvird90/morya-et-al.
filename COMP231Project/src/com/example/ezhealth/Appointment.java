@@ -1,6 +1,8 @@
 package com.example.ezhealth;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Serializable{
 	private int _appointmentId, _doctorId, _patientId, _deptId;
 	private String _date, _time;
 	

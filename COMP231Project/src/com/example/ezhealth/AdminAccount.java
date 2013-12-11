@@ -44,20 +44,25 @@ public class AdminAccount extends Activity {
 				adminKey = etAdminKey.getText().toString();
 				
 				if(db.getAdminKey(MainActivity.md5(adminKey))){
+					if(password.length()>=6){
 					if(password.equals(confirmPassword)){
 						db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
 						adminUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
 						Intent i = new Intent(getBaseContext(), AdminRegistration.class);
 						i.putExtra("AdminUserId", adminUserId);
 						startActivity(i);
+					} else {
+						etConfirmPassword.setError("Password do not match");
+						etConfirmPassword.setText("");
+					}
 						
 					} else {
-						Toast.makeText(getBaseContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+						etPassword.setError("Password must have 6 Characters");
 						etPassword.setText("");
 						etConfirmPassword.setText("");
 					}
 				}else {
-					Toast.makeText(getBaseContext(), "Enter correst admin key", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(), "Enter corret admin key", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

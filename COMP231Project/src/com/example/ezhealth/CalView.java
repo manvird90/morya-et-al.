@@ -40,8 +40,8 @@ public class CalView extends Activity {
                         if(selectedYear==currentYear){
                                 if(selectedMonth==currentMonth){
                                         if(selectedDayOfMonth>currentMonthDay){
-                                                Toast.makeText(getApplicationContext(),selectedDayOfMonth +"/"+selectedMonth+"/"+ selectedYear+"\n"+
-                                                                currentMonthDay+":"+currentMonth+":"+currentYear, Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(getApplicationContext(),selectedDayOfMonth +"/"+selectedMonth+"/"+ selectedYear+"\n"+
+                                                               // currentMonthDay+":"+currentMonth+":"+currentYear, Toast.LENGTH_SHORT).show();
                                                 
                                                 final Time t = new Time();
                                                 t.set( 0, 0 , 0, selectedDayOfMonth, selectedMonth, selectedYear);
@@ -89,8 +89,8 @@ public class CalView extends Activity {
                                         
                                 }else if(selectedMonth > currentMonth){
                                         
-                                        Toast.makeText(getApplicationContext(),selectedDayOfMonth +"/"+selectedMonth+"/"+ selectedYear+"\n"+
-                                                        currentMonthDay+":"+currentMonth+":"+currentYear, Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(getApplicationContext(),selectedDayOfMonth +"/"+selectedMonth+"/"+ selectedYear+"\n"+
+                                         //               currentMonthDay+":"+currentMonth+":"+currentYear, Toast.LENGTH_SHORT).show();
                                         
                                         final Time t = new Time();
                                         t.set( 0, 0 , 0, selectedDayOfMonth, selectedMonth, selectedYear);
@@ -140,8 +140,8 @@ public class CalView extends Activity {
                                 }
                         } else if(selectedYear>currentYear){
                                 
-                                        Toast.makeText(getApplicationContext(),selectedDayOfMonth +"/"+selectedMonth+"/"+ selectedYear+"\n"+
-                                                        currentMonthDay+":"+currentMonth+":"+currentYear, Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(getApplicationContext(),selectedDayOfMonth +"/"+selectedMonth+"/"+ selectedYear+"\n"+
+                                         //               currentMonthDay+":"+currentMonth+":"+currentYear, Toast.LENGTH_SHORT).show();
                                         
                                         final Time t = new Time();
                                         t.set( 0, 0 , 0, selectedDayOfMonth, selectedMonth, selectedYear);

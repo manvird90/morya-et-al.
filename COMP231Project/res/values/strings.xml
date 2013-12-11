@@ -26,29 +26,29 @@
     <string name="adminPageTitle">Register a New Staff Member</string>
 
     <!--  -->
-    <string name="title_activity_hospital_admin">HospitalAdmin</string>
+    <string name="title_activity_hospital_admin">Administrator</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_patient_registration">Patient Registration</string>
-    <string name="title_activity_doctor_registration">Doctor Registration</string>
+    <string name="title_activity_patient_registration">Register Patient</string>
+    <string name="title_activity_doctor_registration">Register Doctor</string>
     <string name="title_activity_google_map_services">GoogleMapServices</string>
-    <string name="title_activity_patient_account">Patient Account</string>
-    <string name="title_activity_receptionist">Receptionist</string>
+    <string name="title_activity_patient_account">Create Patient Account</string>
+    <string name="title_activity_receptionist">Receptionist Home Page</string>
     <string name="title_activity_doctor">Doctor</string>
-    <string name="title_activity_add_doctor">Add Doctor</string>
-    <string name="title_activity_add_receptionist">Add Receptionist</string>
-    <string name="title_activity_addnurse">Add nurse</string>
-    <string name="title_activity_add_pharmacist">Add Pharmacist</string>
-    <string name="title_activity_doctor_account">Doctor Account</string>
-    <string name="title_activity_receptionist_patient_search">Patient Search</string>
-    <string name="title_activity_receptionist_doctor_search">Doctor Search</string>
+    <string name="title_activity_add_doctor">Register Doctor</string>
+    <string name="title_activity_add_receptionist">Register Receptionist</string>
+    <string name="title_activity_addnurse">Register Nurse</string>
+    <string name="title_activity_add_pharmacist">Register Pharmacist</string>
+    <string name="title_activity_doctor_account">Create Doctor Account</string>
+    <string name="title_activity_receptionist_patient_search">Search Patient</string>
+    <string name="title_activity_receptionist_doctor_search">Search Doctor</string>
     <string name="title_activity_receptionist_patient_profile_view">Patient Profile</string>
     <string name="title_activity_receptionist_doctor_profile_view">Doctor Profile</string>
-    <string name="title_activity_admin_account">Admin Account</string>
-    <string name="title_activity_admin_registration">Admin Registration</string>
+    <string name="title_activity_admin_account">Administrator Account</string>
+    <string name="title_activity_admin_registration">Register Administrator</string>
     <string name="title_activity_receptionist_schedule_appointment">Schedule Appointment</string>
-    <string name="title_activity_admin_doctor_search_to_add_schedule">Doctor Search To Add Schedule</string>
+    <string name="title_activity_admin_doctor_search_to_add_schedule">Search Doctor For Schedule</string>
     <string name="title_activity_admin_add_doctor_schedule">Add Doctor Schedule</string>
-    <string name="title_activity_doctor_login_btn">Doctor Main</string>
+    <string name="title_activity_doctor_login_btn">Doctor Home Page</string>
     <!-- Spinner array for the Day values -->
     <string-array name="spinnerDay">
         <item>Select Day</item>
@@ -63,14 +63,16 @@
 
     <string name="title_activity_receptionist_view_all_patients">All Patients</string>
     <string name="title_activity_receptionist_account">Receptionist Account</string>
-    <string name="title_activity_receptionistdb">Receptionistdb</string>
-    <string name="title_activity_receptionist_view_all_doctor">All Doctor</string>
-    <string name="title_activity_patient_homepage">Patient Home page</string>
-    <string name="title_activity_lab_account">Lab Account</string>
-    <string name="title_activity_add_lab">Add Lab</string>
-    <string name="title_activity_doctor_home_page">Doctor Profile</string>
-    <string name="title_activity_cal_view">CalView</string>
-    <string name="title_activity_patient_visit_doctor_on_appointment">Appointment Info</string>
-    <string name="title_activity_patient_profile">PatientProfile</string>
+    <string name="title_activity_receptionistdb">Receptionist HomeP</string>
+    <string name="title_activity_receptionist_view_all_doctor">Receptionist</string>
+    <string name="title_activity_patient_homepage">Patient Home Page</string>
+    <string name="title_activity_lab_account">Create Lab Staff Account</string>
+    <string name="title_activity_add_lab">Register Lab Staff</string>
+    <string name="title_activity_doctor_home_page">Doctor Home Page</string>
+    <string name="title_activity_cal_view">Appintment Date Selection</string>
+    <string name="title_activity_patient_visit_doctor_on_appointment">Add Appointment Detail</string>
+    <string name="title_activity_patient_profile">Patient Profile</string>
+    <string name="title_activity_patient_view_appointments">PatientViewAppointments</string>
+    <string name="title_activity_appointment_detail">AppointmentDetail</string>
 
 </resources>

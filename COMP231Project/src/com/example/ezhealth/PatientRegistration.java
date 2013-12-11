@@ -122,6 +122,7 @@ public class PatientRegistration extends Activity {
 				db.addVitalInfo(pv);
 				db.close();
 				Toast.makeText(getBaseContext(),"Patient id is "+ displayPatientId, Toast.LENGTH_SHORT).show();
+				finish();
 				Intent intent = new Intent(getBaseContext(), Receptionist.class);
 				startActivity(intent);
 				} else {
@@ -141,8 +142,127 @@ public class PatientRegistration extends Activity {
 		getMenuInflater().inflate(R.menu.patient_registration, menu);
 		return true;
 	}
+	int buffer1=0;
+	public boolean checkEmailCorrect(String etEmail) {
+        String pttn = "^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\\.([a-zA-Z])+([a-zA-Z])+";
+        Pattern p = Pattern.compile(pttn);
+        Matcher m = p.matcher(etEmail);
 
+        if (m.matches()) {
+        	//buffer1=1;
+        	
+               return true;
+               
+        }
+        //buffer1=2;
+        return false;
+        
+ }
+	int buffer2=0;
+	public boolean checkPhoneCorrect(String etPhone) {
+        String pttn = "^[+]?[0-9]{10,13}$";
+        Pattern p = Pattern.compile(pttn);
+        Matcher m = p.matcher(etPhone);
+
+        if (m.matches()) {
+        	//buffer1=1;
+        	
+               return true;
+               
+        }
+        //buffer1=2;
+        return false;
+        
+ }
+	//^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$
+	int buffer3=0;
+	public boolean checkDOBCorrect(String etDateOfBirth) {
+        String pttn = "(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)";
+        Pattern p = Pattern.compile(pttn);
+        Matcher m = p.matcher(etDateOfBirth);
+
+        if (m.matches()) {
+        	//buffer1=1;
+        	
+               return true;
+               
+        }
+        //buffer1=2;
+        return false;
+        
+ }
+	int buffer4=0;
+	public boolean checkFnameCorrect(String etFirstName) {
+        String pttn = "[A-Za-z]+";
+        Pattern p = Pattern.compile(pttn);
+        Matcher m = p.matcher(etFirstName);
+
+        if (m.matches()) {
+        	//buffer1=1;
+        	
+               return true;
+               
+        }
+        //buffer1=2;
+        return false;
+        
+ }
+	int buffer5=0;
+	public boolean checkLnameCorrect(String etLastName) {
+        String pttn = "[A-Za-z]+";
+        Pattern p = Pattern.compile(pttn);
+        Matcher m = p.matcher(etLastName);
+
+        if (m.matches()) {
+        	//buffer1=1;
+        	
+               return true;
+               
+        }
+        //buffer1=2;
+        return false;
+        
+ }
+	String etEmail1=null;
+	String etPhone1=null;
+	String etDOB=null;
+	String etFname=null;
+	String etLname=null;
 	public boolean validateField(){
+		
+		 etEmail1=etEmail.getText().toString();
+		 etPhone1=etPhone.getText().toString();
+		 etDOB=etDateOfBirth.getText().toString();
+		 etFname=etFirstName.getText().toString();
+		 etLname=etLastName.getText().toString();
+		 
+		if(etFirstName.getText().toString().equals("")||checkFnameCorrect(etFname)!=true){
+			etFirstName.setError("First Name recieve only Characters");
+		} else if (etLastName.getText().toString().equals("")||checkLnameCorrect(etLname)!=true){
+			etLastName.setError("Last Name recieve only Characters");
+		}  else if (etDateOfBirth.getText().toString().equals("")|| checkDOBCorrect(etDOB)!=true){
+			etDateOfBirth.setError("Enter Valid Date Of Birth!");
+		} else if (etEmail.getText().toString().equals("")|| checkEmailCorrect(etEmail1)!=true/* buffer1!=1*/){
+			etEmail.setError("Enter valid email address!");
+		} else if (etPhone.getText().toString().equals("")|| checkPhoneCorrect(etPhone1)!=true/* buffer1!=1*/){
+			etPhone.setError("Enter valid Phone number!");
+		}  else if (etApartment.getText().toString().equals("")){
+			etApartment.setError("Apartment filed cant be left blank!");
+		}else if (etStreet.getText().toString().equals("")){
+				etStreet.setError("Apartment filed cant be left blank!");
+		}else if (etCity.getText().toString().equals("")){
+			etCity.setError("City filed cant be left blank!");
+		}else if (etProvince.getText().toString().equals("")){
+			etProvince.setError("Province filed cant be left blank!");
+		} else if (etCountry.getText().toString().equals("")){
+			etCountry.setError("Country filed cant be left blank!");
+		} else if (etPostalCode.getText().toString().equals("")){
+			etPostalCode.setError("Postal Code filed cant be left blank!");
+		} else if (etHealthPolicyNumber.getText().toString().equals("")){
+			etHealthPolicyNumber.setError("Policy Number is required!");
+		} else if (etInsuranceCompany.getText().toString().equals("")){
+			etInsuranceCompany.setError("Insurance company name is required!");
+		}
 		
 		if(etFirstName.getText().toString().equals("")){
 			etFirstName.setError("First Name is required!");

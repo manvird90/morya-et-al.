@@ -39,15 +39,22 @@ public class PatientAccount extends Activity {
 				password = etPassword.getText().toString();
 				confirmPassword = etConfirmPassword.getText().toString();
 				if(db.isUserNameAvailable(userName)){
-					if(password.equals(confirmPassword)){
+					if(password.length()>=6){
+						if(password.equals(confirmPassword)){
 						db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));
 						patientUserId = db.getUserId(userType, userName,MainActivity.md5(password) );
+						finish();
 						Intent i = new Intent(getBaseContext(), PatientRegistration.class);
 						i.putExtra("PatientUserId", patientUserId);
 						startActivity(i);
 						
 					} else {
-						Toast.makeText(getBaseContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+						etConfirmPassword.setError("Password do not match");
+						etConfirmPassword.setText("");
+					}
+				}
+					else {
+						etPassword.setError("Password must have 6 Characters");
 						etPassword.setText("");
 						etConfirmPassword.setText("");
 					}

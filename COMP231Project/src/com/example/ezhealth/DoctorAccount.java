@@ -40,7 +40,7 @@ public class DoctorAccount extends Activity {
 				password = etPassword.getText().toString();
 				confirmPassword = etConfirmPassword.getText().toString();
 				if(db.isUserNameAvailable(userName)){
-					Toast.makeText(getBaseContext(), " "+db.isUserNameAvailable(userName)+ " " , Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getBaseContext(), " "+db.isUserNameAvailable(userName)+ " " , Toast.LENGTH_SHORT).show();
 					if(password.length()>=6){
 					if(password.equals(confirmPassword)){
 						db.addUser(new UserLogin(userType, userName, MainActivity.md5(password)));

@@ -41,12 +41,7 @@ public class MainActivity extends Activity {
 		Log.d("Insert: " , "Default Users");
 		db.addAdminKey(md5("HospitalAdminEzHealth"));
 		db.addUser(new UserLogin("HospitalAdmin","admin", md5("admin")));
-		//db.addUser(new UserLogin("Patient","patient", md5("patient")));
-		//db.addUser(new UserLogin("LabStaff","labstaff", md5("labstaff")));
-		//db.addUser(new UserLogin("Nurse","nurse", md5("nurse")));
 		db.addUser(new UserLogin("Receptionist","receptionist", md5("receptionist")));
-		//db.addUser(new UserLogin("Pharmacist","pharmacist", md5("pharmacist")));
-		//db.addUser(new UserLogin("Doctor","doctor", md5("doctor")));
 		
 		//add departments 
 		db.addDepartment("Anaesthetics");
